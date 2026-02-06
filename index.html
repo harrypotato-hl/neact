@@ -331,7 +331,6 @@
             border-bottom: 1px solid var(--glass-border);
             transition: background 0.5s ease;
         }
-        /* Faded background in Dark Mode for Timeline Intro */
         body.dark-mode .history-intro {
             background: linear-gradient(to bottom, #0c0b0a 0%, #151311 100%);
         }
@@ -367,15 +366,12 @@
         .scene-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Faded dark background for scenes in Dark Mode */
             background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.4) 100%);
             z-index: 2;
         }
-        
         body.dark-mode .scene-overlay {
             background: radial-gradient(circle at 30% 50%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.95) 100%);
         }
-
         body.light-mode .scene-overlay {
             background: linear-gradient(90deg, rgba(255, 253, 245, 0.95) 0%, rgba(255, 253, 245, 0.7) 50%, transparent 100%);
         }
@@ -513,9 +509,33 @@
         .hymn-video-panel { flex: 1; min-width: 350px; background: black; display: flex; align-items: center; justify-content: center; position: relative; }
         .hymn-video-panel iframe { width: 100%; height: 100%; min-height: 500px; border: none; }
 
+        /* --- Message Section (Harry Message) --- */
+        #message {
+            background: linear-gradient(rgba(var(--hero-overlay-rgb), var(--letter-overlay, 0.7)), rgba(var(--hero-overlay-rgb), var(--letter-overlay, 0.7))), 
+                        url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-attachment: fixed; padding: 180px 5%;
+            min-height: 100vh; display: flex; align-items: center;
+            z-index: var(--z-content);
+        }
+        body.dark-mode #message { --letter-overlay: 0.94; }
+
+        .letter-glass {
+            max-width: 1000px; margin: 0 auto; background: var(--glass-bg); backdrop-filter: blur(40px);
+            padding: 100px 80px; border-radius: 60px; border: 1px solid var(--glass-border);
+            box-shadow: 0 50px 120px rgba(0,0,0,0.08); position: relative;
+        }
+        
+        .letter-glass::before {
+            content: '“'; position: absolute; top: 30px; left: 40px; font-size: 10rem;
+            color: var(--primary); opacity: 0.15; line-height: 1; font-family: 'Lexend', sans-serif;
+        }
+
+        .letter-text p { font-size: 1.35rem; margin-bottom: 25px; font-weight: 500; color: var(--text-dark); line-height: 1.8; text-align: justify; }
+        .signature { text-align: right; font-size: 2.8rem; color: var(--primary); font-weight: 800; margin-top: 50px; font-family: 'Lexend', sans-serif; }
+
         /* --- Team Grid Section --- */
         #team { padding: 160px 5%; min-height: 100vh; z-index: var(--z-content); }
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
         .team-card { 
             background: var(--glass-bg); backdrop-filter: blur(20px); padding: 50px 30px; 
             border-radius: 40px; text-align: center; border: 1px solid var(--glass-border); 
@@ -559,44 +579,36 @@
         }
         .social-link:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-5px); color: white; }
 
-        .copyright-text { opacity: 0.6; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+        .copyright-text { opacity: 0.7; font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; color: var(--footer-text); }
 
         /* --- Mobile Responsiveness --- */
         @media (max-width: 1024px) {
-            .bento-grid { 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 20px;
-            }
+            .bento-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
             .bento-item:nth-child(3) { grid-column: span 2; min-height: 350px; }
             .bento-item:nth-child(4) { grid-column: span 2; min-height: 350px; }
         }
 
         @media (max-width: 768px) {
             #cursor { display: none; } * { cursor: auto !important; }
-            
             nav { padding: 15px 0; }
             .nav-links { position: fixed; top: 0; right: -100%; width: 85%; height: 100vh; background: var(--nav-bg); backdrop-filter: blur(25px); flex-direction: column; justify-content: center; align-items: center; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: -20px 0 60px rgba(0,0,0,0.15); }
             .nav-links.active { right: 0; }
             .mobile-toggle { display: block; }
-            
             .hero-title { font-size: 3.5rem; }
             .scene { padding: 0 8% 0 15%; }
             .scene h3 { font-size: 2.2rem; }
             .scene p { font-size: 1.15rem; }
-            
             #who-we-are { padding: 100px 5%; }
             .bento-grid { grid-template-columns: 1fr; gap: 16px; }
             .bento-item { grid-column: span 1 !important; min-height: 320px !important; padding: 35px; }
             .bento-content h3 { font-size: 1.8rem; }
-            .bento-content p { font-size: 1rem; }
-
             .hymn-lyrics-panel { padding: 50px 25px; } 
             .lyrics-sheet { padding: 30px 20px; }
             .team-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
             .team-card { padding: 40px 20px; }
             .initial-avatar { width: 60px; height: 60px; font-size: 1.4rem; }
-            
-            #team, #hymn { padding: 100px 5%; min-height: auto; }
+            #team, #hymn, #message { padding: 100px 5%; min-height: auto; }
+            .letter-glass { padding: 50px 25px; } .letter-text p { font-size: 1.1rem; }
             footer { padding: 100px 5% 50px; min-height: auto; }
             .social-link { width: 55px; height: 55px; }
         }
@@ -625,6 +637,7 @@
                 <li><a href="#history" class="magnetic">Our Journey</a></li>
                 <li><a href="#who-we-are" class="magnetic">Who We Are</a></li>
                 <li><a href="#hymn" class="magnetic">Hymn</a></li>
+                <li><a href="#message" class="magnetic">A Note</a></li>
                 <li><a href="#team" class="magnetic">The 19</a></li>
                 <li>
                     <button class="theme-toggle magnetic" id="themeToggle" title="Switch Theme">
@@ -775,6 +788,21 @@
         </div>
     </section>
 
+    <!-- Harry's Message Restored -->
+    <section id="message">
+        <div class="letter-glass reveal">
+            <div class="letter-text">
+                <p>Lately, I’ve been thinking about our time on Hilokal more than I expected to. And if you’re reading this, maybe it’s because you’ve felt that same way too.</p>
+                <p>We’ve all gone back to our “real” lives now. The tables are mostly empty, the app doesn’t feel the same, and the familiar notifications no longer light up our screens. But I couldn’t let all that silence pass without saying thank you.</p>
+                <p>When the pandemic hit and the world suddenly felt small and lonely, those tables became my entire world. We joined to practice languages, but somehow we ended up practicing how to survive a really hard chapter together. Those long nights, sometimes studying, but mostly just talking, laughing, venting, and keeping each other company when there was nowhere else to be meant more to me than I can properly explain. They kept me going.</p>
+                <p>It still amazes me how people I never met in person became such a big part of my everyday life. You weren’t just voices or avatars on a screen. You were my routine, my comfort, my sense of belonging when everything else felt uncertain. That connection was real, and it mattered.</p>
+                <p>I’m genuinely happy to see everyone moving forward now, building their lives, chasing the things we used to talk about while the world was paused. That’s what we were waiting for back then, after all, for life to start again. Still, a part of me misses those nights and the people who made them special. I’ll always carry the memory of those voices that made the lockdowns feel less heavy.</p>
+                <p>Even if we never find ourselves at the same table again, I’m deeply grateful for the time we shared. I hope you’re doing well, wherever you are. I’m quietly cheering for you.</p>
+                <div class="signature">Harry</div>
+            </div>
+        </div>
+    </section>
+
     <section id="team">
         <div class="section-header reveal">
             <h2 class="section-title">Meet The NEACT 19</h2>
@@ -797,7 +825,8 @@
                 <i data-lucide="mail" size="24"></i>
             </a>
         </div>
-        <p class="copyright-text reveal">&copy; <span id="year"></span> NEACT LEGACY. DESIGNED FOR MEMORIES.</p>
+        <!-- Blurred fix: Removed reveal class here to ensure instant visibility -->
+        <p class="copyright-text">&copy; <span id="year"></span> NEACT LEGACY. DESIGNED FOR MEMORIES.</p>
     </footer>
 
     <script>
@@ -826,7 +855,6 @@
             teamGrid.appendChild(div);
         });
 
-        // --- Magnetic UI Logic ---
         const magneticElements = document.querySelectorAll('.magnetic');
         magneticElements.forEach(el => {
             el.addEventListener('mousemove', function(e) {
@@ -840,12 +868,10 @@
             });
         });
 
-        // Custom Cursor Logic
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px'; 
             cursor.style.top = e.clientY + 'px';
-            
             document.querySelectorAll('.floating-asset').forEach(asset => {
                 const speed = parseFloat(asset.getAttribute('data-speed'));
                 const x = (window.innerWidth - e.pageX * speed) / 100;
@@ -854,19 +880,11 @@
             });
         });
 
-        // Cursor scaling
         document.querySelectorAll('a, button, .team-card, .bento-item, .social-link').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.width = '50px';
-                cursor.style.height = '50px';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.width = '20px';
-                cursor.style.height = '20px';
-            });
+            el.addEventListener('mouseenter', () => { cursor.style.width = '50px'; cursor.style.height = '50px'; });
+            el.addEventListener('mouseleave', () => { cursor.style.width = '20px'; cursor.style.height = '20px'; });
         });
 
-        // Logo Interaction
         const logo = document.getElementById('logo');
         logo.addEventListener('click', (e) => {
             e.preventDefault();
@@ -875,7 +893,6 @@
             setTimeout(() => logo.classList.remove('spin'), 800);
         });
 
-        // Theme Toggle Logic
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
         const updateThemeIcon = (isDark) => {
@@ -883,17 +900,14 @@
             lucide.createIcons();
         };
         const savedTheme = localStorage.getItem('neact-theme');
-        if (savedTheme === 'dark') { body.classList.add('dark-mode'); body.classList.remove('light-mode'); updateThemeIcon(true); }
-        else { body.classList.add('light-mode'); body.classList.remove('dark-mode'); }
+        if (savedTheme === 'dark') { body.classList.add('dark-mode'); updateThemeIcon(true); }
 
         themeToggle.addEventListener('click', () => {
             const isDark = body.classList.toggle('dark-mode');
-            body.classList.toggle('light-mode', !isDark);
             localStorage.setItem('neact-theme', isDark ? 'dark' : 'light');
             updateThemeIcon(isDark);
         });
 
-        // Mobile Menu
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         menuToggle.addEventListener('click', () => {
@@ -903,7 +917,6 @@
             lucide.createIcons();
         });
 
-        // Observers
         const sceneObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
@@ -917,7 +930,6 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-        // Physics Rain
         function rain(count = 25) {
             const emojis = ['🥐', '☕', '✨', '🥯'];
             for(let i=0; i<count; i++) {
@@ -927,16 +939,12 @@
                     el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
                     el.style.left = Math.random() * 100 + 'vw';
                     document.body.appendChild(el);
-                    setTimeout(() => {
-                        el.style.opacity = '0';
-                        setTimeout(() => el.remove(), 1000);
-                    }, 4000);
+                    setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 1000); }, 4000);
                 }, i * 80);
             }
         }
         document.getElementById('hero').addEventListener('click', () => rain());
 
-        // Background Assets
         const container = document.getElementById('bg-assets-container');
         const emojis = ['🥐', '☕', '🥯', '✨'];
         for(let i=0; i<12; i++) {
@@ -949,7 +957,6 @@
             container.appendChild(asset);
         }
 
-        // Story Bar Logic
         window.addEventListener('scroll', () => {
             const history = document.querySelector('.story-container');
             if(!history) return;
