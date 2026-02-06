@@ -227,6 +227,13 @@
 
         .mobile-toggle { display: none; color: var(--primary); cursor: pointer; z-index: 1001; }
 
+        /* --- Global Section Styles --- */
+        section, footer {
+            scroll-snap-align: start;
+            position: relative;
+            z-index: var(--z-content);
+        }
+
         /* --- Hero Section --- */
         #hero {
             height: 100vh;
@@ -246,7 +253,6 @@
             background-position: center;
             background-attachment: fixed;
             overflow: hidden;
-            z-index: var(--z-content);
         }
 
         body.dark-mode #hero {
@@ -418,7 +424,7 @@
             box-shadow: 0 0 20px var(--primary);
         }
 
-        /* --- Who We Are (Bento) --- */
+        /* --- Who We Are (Refined Bento Grid) --- */
         #who-we-are { 
             padding: 160px 5%; 
             min-height: 100vh;
@@ -428,31 +434,49 @@
             z-index: var(--z-content);
         }
 
-        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .bento-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 32px; 
+        }
+
         .bento-item { 
             border-radius: 45px; 
-            padding: 50px; 
+            padding: 55px; 
             position: relative; 
             overflow: hidden; 
-            min-height: 420px; 
+            min-height: 440px; 
             display: flex; 
             flex-direction: column; 
             justify-content: flex-end; 
             border: 1px solid var(--glass-border); 
             background-size: cover; 
             background-position: center; 
-            transition: transform 0.4s ease, box-shadow 0.4s ease; 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease; 
         }
+
         .bento-item::before { 
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 60%, transparent 100%); 
+            content: ''; 
+            position: absolute; 
+            top: 0; left: 0; right: 0; bottom: 0; 
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%); 
             z-index: 1; 
         }
-        .bento-item:hover { transform: translateY(-10px); box-shadow: 0 25px 60px rgba(0,0,0,0.15); }
+
+        .bento-item:hover { 
+            transform: translateY(-12px) scale(1.01); 
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15); 
+        }
         
-        .bento-content { position: relative; z-index: 2; color: white !important; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        .bento-content h3 { font-size: 2.2rem; margin-bottom: 12px; }
-        .bento-content p { font-size: 1.15rem; opacity: 0.9; line-height: 1.6; }
+        .bento-content { 
+            position: relative; 
+            z-index: 2; 
+            color: white !important; 
+            text-shadow: 0 2px 12px rgba(0,0,0,0.5); 
+        }
+
+        .bento-content h3 { font-size: 2.2rem; margin-bottom: 15px; }
+        .bento-content p { font-size: 1.15rem; opacity: 0.95; line-height: 1.6; }
 
         .bento-item:nth-child(1) { grid-column: span 1; background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=800'); }
         .bento-item:nth-child(2) { grid-column: span 1; background-image: url('https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&q=80&w=800'); }
@@ -537,28 +561,42 @@
 
         .copyright-text { opacity: 0.6; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
 
-        /* --- Utilities --- */
-        .rain-item { position: fixed; top: -50px; pointer-events: none; z-index: 1001; font-size: 24px; animation: fall 5s linear forwards; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-
         /* --- Mobile Responsiveness --- */
+        @media (max-width: 1024px) {
+            .bento-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 20px;
+            }
+            .bento-item:nth-child(3) { grid-column: span 2; min-height: 350px; }
+            .bento-item:nth-child(4) { grid-column: span 2; min-height: 350px; }
+        }
+
         @media (max-width: 768px) {
             #cursor { display: none; } * { cursor: auto !important; }
-            html { scroll-snap-type: none; }
+            
             nav { padding: 15px 0; }
             .nav-links { position: fixed; top: 0; right: -100%; width: 85%; height: 100vh; background: var(--nav-bg); backdrop-filter: blur(25px); flex-direction: column; justify-content: center; align-items: center; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: -20px 0 60px rgba(0,0,0,0.15); }
             .nav-links.active { right: 0; }
             .mobile-toggle { display: block; }
+            
             .hero-title { font-size: 3.5rem; }
             .scene { padding: 0 8% 0 15%; }
             .scene h3 { font-size: 2.2rem; }
             .scene p { font-size: 1.15rem; }
+            
+            #who-we-are { padding: 100px 5%; }
+            .bento-grid { grid-template-columns: 1fr; gap: 16px; }
+            .bento-item { grid-column: span 1 !important; min-height: 320px !important; padding: 35px; }
+            .bento-content h3 { font-size: 1.8rem; }
+            .bento-content p { font-size: 1rem; }
+
             .hymn-lyrics-panel { padding: 50px 25px; } 
             .lyrics-sheet { padding: 30px 20px; }
             .team-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
             .team-card { padding: 40px 20px; }
             .initial-avatar { width: 60px; height: 60px; font-size: 1.4rem; }
-            #team, #who-we-are, #hymn { padding: 100px 5%; min-height: auto; }
+            
+            #team, #hymn { padding: 100px 5%; min-height: auto; }
             footer { padding: 100px 5% 50px; min-height: auto; }
             .social-link { width: 55px; height: 55px; }
         }
@@ -567,6 +605,10 @@
             .team-grid { grid-template-columns: 1fr; } 
             .hero-title { font-size: 2.8rem; }
         }
+
+        /* --- Utilities --- */
+        .rain-item { position: fixed; top: -50px; pointer-events: none; z-index: 1001; font-size: 24px; animation: fall 5s linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
     </style>
 </head>
 <body class="light-mode">
