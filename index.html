@@ -42,7 +42,7 @@
             --z-assets: -1;
             --z-content: 1;
             --z-nav: 1000;
-            --z-cursor: 9999;
+            --z-cursor: 20000; 
         }
 
         /* Dark Mode Overrides */
@@ -317,8 +317,13 @@
             background: #000; 
             overflow: hidden; 
             z-index: var(--z-content);
+            transition: background 0.5s ease;
         }
         
+        body.dark-mode #history {
+            background: linear-gradient(to bottom, #0c0b0a, #1a1816);
+        }
+
         .history-intro { 
             height: 100vh;
             min-height: 600px;
@@ -331,8 +336,10 @@
             border-bottom: 1px solid var(--glass-border);
             transition: background 0.5s ease;
         }
+
         body.dark-mode .history-intro {
             background: linear-gradient(to bottom, #0c0b0a 0%, #151311 100%);
+            border-bottom-color: rgba(255, 165, 0, 0.1);
         }
 
         .section-title { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 10px; color: var(--text-dark); }
@@ -366,14 +373,16 @@
         .scene-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.4) 100%);
             z-index: 2;
         }
-        body.dark-mode .scene-overlay {
-            background: radial-gradient(circle at 30% 50%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.95) 100%);
-        }
+        
+        /* Optimized for Readability */
         body.light-mode .scene-overlay {
-            background: linear-gradient(90deg, rgba(255, 253, 245, 0.95) 0%, rgba(255, 253, 245, 0.7) 50%, transparent 100%);
+            background: linear-gradient(90deg, rgba(255, 253, 245, 0.98) 0%, rgba(255, 253, 245, 0.8) 40%, transparent 100%);
+        }
+
+        body.dark-mode .scene-overlay {
+            background: linear-gradient(90deg, rgba(12, 11, 10, 0.98) 0%, rgba(12, 11, 10, 0.85) 45%, rgba(0,0,0,0.4) 100%);
         }
 
         .scene-content {
@@ -398,6 +407,8 @@
 
         .scene h3 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 20px; color: var(--text-dark); }
         .scene p { font-size: 1.3rem; color: var(--text-muted); font-weight: 500; line-height: 1.7; }
+        
+        body.dark-mode .scene p { color: #e5d8d0; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
 
         .story-progress-fixed {
             position: absolute;
@@ -509,29 +520,43 @@
         .hymn-video-panel { flex: 1; min-width: 350px; background: black; display: flex; align-items: center; justify-content: center; position: relative; }
         .hymn-video-panel iframe { width: 100%; height: 100%; min-height: 500px; border: none; }
 
-        /* --- Message Section (Harry Message) --- */
+        /* --- Message Section (Envelope Toggle) --- */
         #message {
             background: linear-gradient(rgba(var(--hero-overlay-rgb), var(--letter-overlay, 0.7)), rgba(var(--hero-overlay-rgb), var(--letter-overlay, 0.7))), 
                         url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=2000');
             background-size: cover; background-attachment: fixed; padding: 180px 5%;
-            min-height: 100vh; display: flex; align-items: center;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
             z-index: var(--z-content);
         }
         body.dark-mode #message { --letter-overlay: 0.94; }
 
-        .letter-glass {
-            max-width: 1000px; margin: 0 auto; background: var(--glass-bg); backdrop-filter: blur(40px);
-            padding: 100px 80px; border-radius: 60px; border: 1px solid var(--glass-border);
-            box-shadow: 0 50px 120px rgba(0,0,0,0.08); position: relative;
+        .envelope-trigger {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            padding: 60px 80px;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.1);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
         }
-        
-        .letter-glass::before {
-            content: '“'; position: absolute; top: 30px; left: 40px; font-size: 10rem;
-            color: var(--primary); opacity: 0.15; line-height: 1; font-family: 'Lexend', sans-serif;
+        .envelope-trigger:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 50px 120px rgba(0,0,0,0.15);
+            background: var(--white);
         }
-
-        .letter-text p { font-size: 1.35rem; margin-bottom: 25px; font-weight: 500; color: var(--text-dark); line-height: 1.8; text-align: justify; }
-        .signature { text-align: right; font-size: 2.8rem; color: var(--primary); font-weight: 800; margin-top: 50px; font-family: 'Lexend', sans-serif; }
+        .envelope-icon {
+            font-size: 5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .envelope-trigger h3 { font-size: 2rem; color: var(--text-dark); }
+        .envelope-trigger p { font-weight: 600; color: var(--text-muted); opacity: 0.8; }
 
         /* --- Team Grid Section --- */
         #team { padding: 160px 5%; min-height: 100vh; z-index: var(--z-content); }
@@ -540,13 +565,127 @@
             background: var(--glass-bg); backdrop-filter: blur(20px); padding: 50px 30px; 
             border-radius: 40px; text-align: center; border: 1px solid var(--glass-border); 
             transition: var(--transition-smooth);
+            cursor: pointer;
         }
         .team-card:hover { border-color: var(--primary); background: var(--glass-bg-dark); transform: translateY(-10px); box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
         
-        .initial-avatar { width: 80px; height: 80px; background: var(--peach); color: var(--coffee); border-radius: 50%; margin: 0 auto 25px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.8rem; transition: 0.4s; }
+        .avatar-wrapper {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+        }
+        .initial-avatar { 
+            width: 100%; height: 100%; 
+            background: var(--peach); color: var(--coffee); 
+            border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; 
+            font-weight: 800; font-size: 1.8rem; transition: 0.4s; 
+        }
+        .flag-badge {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            font-size: 1.6rem;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+            pointer-events: none;
+        }
         .team-card:hover .initial-avatar { background: var(--primary); color: white; transform: rotate(15deg) scale(1.1); }
-        .team-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .team-card h3 { font-size: 1.4rem; margin-bottom: 10px; }
         .team-card p { font-weight: 700; color: var(--primary-dark); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; }
+
+        /* --- Profile & Letter Modals --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: var(--glass-bg-dark);
+            padding: 60px 50px;
+            border-radius: 60px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            transform: translateY(40px) scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.2);
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        
+        /* Wider Content for the Letter */
+        .letter-modal-content { max-width: 900px; padding: 100px 80px; text-align: justify; }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 30px; right: 30px;
+            background: none; border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            opacity: 0.5;
+            transition: 0.3s;
+        }
+        .modal-close:hover { opacity: 1; transform: rotate(90deg); }
+
+        .modal-avatar-wrapper {
+            position: relative;
+            width: 100px; height: 100px; margin: 0 auto 25px;
+        }
+        .modal-avatar {
+            width: 100%; height: 100%; background: var(--primary);
+            color: white; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 2.5rem; font-weight: 800;
+            box-shadow: 0 15px 30px rgba(255,165,0,0.3);
+        }
+
+        .modal-name { font-size: 2.2rem; color: var(--text-dark); margin-bottom: 5px; }
+        .modal-desc { color: var(--primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; font-size: 0.9rem; }
+        
+        .modal-summary { 
+            font-size: 1.1rem; 
+            line-height: 1.6; 
+            color: var(--text-muted); 
+            margin-bottom: 30px; 
+            text-align: center;
+            padding: 0 10px;
+        }
+        
+        /* Letter Text Specifics */
+        .letter-body p { font-size: 1.25rem; margin-bottom: 25px; font-weight: 500; color: var(--text-dark); line-height: 1.8; }
+        .signature { text-align: right; font-size: 2.8rem; color: var(--primary); font-weight: 800; margin-top: 50px; font-family: 'Lexend', sans-serif; }
+
+        .modal-divider { width: 60px; height: 3px; background: var(--peach); margin: 0 auto 30px; border-radius: 2px; }
+
+        .modal-info-group { text-align: left; background: rgba(0,0,0,0.03); padding: 25px; border-radius: 30px; margin-top: 10px; }
+        body.dark-mode .modal-info-group { background: rgba(255,255,255,0.03); }
+
+        .info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .info-item:last-child { margin-bottom: 0; }
+        .info-label { font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--coffee-light); min-width: 100px; }
+        .info-value { font-weight: 600; color: var(--text-dark); }
 
         /* --- Footer --- */
         footer {
@@ -556,7 +695,7 @@
             text-align: center;
             border-radius: 100px 100px 0 0;
             background-image: linear-gradient(var(--footer-overlay), var(--footer-overlay-deep)), 
-                              url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=40&w=1200');
+                              url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&q=80&w=1200');
             background-size: cover;
             position: relative;
             z-index: var(--z-content);
@@ -606,11 +745,16 @@
             .lyrics-sheet { padding: 30px 20px; }
             .team-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
             .team-card { padding: 40px 20px; }
-            .initial-avatar { width: 60px; height: 60px; font-size: 1.4rem; }
+            .avatar-wrapper { width: 60px; height: 60px; }
+            .initial-avatar { font-size: 1.4rem; }
             #team, #hymn, #message { padding: 100px 5%; min-height: auto; }
-            .letter-glass { padding: 50px 25px; } .letter-text p { font-size: 1.1rem; }
+            .envelope-trigger { padding: 40px 30px; width: 100%; }
+            .letter-modal-content { padding: 60px 25px; }
+            .letter-body p { font-size: 1.1rem; }
             footer { padding: 100px 5% 50px; min-height: auto; }
             .social-link { width: 55px; height: 55px; }
+            .modal-content { padding: 50px 30px; }
+            .modal-name { font-size: 1.8rem; }
         }
 
         @media (max-width: 480px) { 
@@ -750,7 +894,7 @@
                     <p>A safe space to share your story. Privacy is respected, and every voice is heard.</p>
                 </div>
             </div>
-            <div class="bento-item reveal">
+            <div class="get-item bento-item reveal">
                 <div class="bento-content">
                     <h3>Our Goal</h3>
                     <p>“Fostering genuine connections, building bridges of understanding, and creating a global community where friendship transcends boundaries — inspiring kindness, support, and camaraderie.”</p>
@@ -783,30 +927,25 @@
                 </div>
             </div>
             <div class="hymn-video-panel">
-                <iframe src="https://www.youtube.com/embed/WPtQN58Irkc" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/WPtQN58Irkc" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
             </div>
         </div>
     </section>
 
-    <!-- Harry's Message Restored -->
+    <!-- Trigger Section for the Letter -->
     <section id="message">
-        <div class="letter-glass reveal">
-            <div class="letter-text">
-                <p>Lately, I’ve been thinking about our time on Hilokal more than I expected to. And if you’re reading this, maybe it’s because you’ve felt that same way too.</p>
-                <p>We’ve all gone back to our “real” lives now. The tables are mostly empty, the app doesn’t feel the same, and the familiar notifications no longer light up our screens. But I couldn’t let all that silence pass without saying thank you.</p>
-                <p>When the pandemic hit and the world suddenly felt small and lonely, those tables became my entire world. We joined to practice languages, but somehow we ended up practicing how to survive a really hard chapter together. Those long nights, sometimes studying, but mostly just talking, laughing, venting, and keeping each other company when there was nowhere else to be meant more to me than I can properly explain. They kept me going.</p>
-                <p>It still amazes me how people I never met in person became such a big part of my everyday life. You weren’t just voices or avatars on a screen. You were my routine, my comfort, my sense of belonging when everything else felt uncertain. That connection was real, and it mattered.</p>
-                <p>I’m genuinely happy to see everyone moving forward now, building their lives, chasing the things we used to talk about while the world was paused. That’s what we were waiting for back then, after all, for life to start again. Still, a part of me misses those nights and the people who made them special. I’ll always carry the memory of those voices that made the lockdowns feel less heavy.</p>
-                <p>Even if we never find ourselves at the same table again, I’m deeply grateful for the time we shared. I hope you’re doing well, wherever you are. I’m quietly cheering for you.</p>
-                <div class="signature">Harry</div>
+        <div class="envelope-trigger reveal magnetic" id="openLetter">
+            <div class="envelope-icon">
+                <i data-lucide="mail" size="80"></i>
             </div>
+            <h3>A Personal Note</h3>
         </div>
     </section>
 
     <section id="team">
         <div class="section-header reveal">
             <h2 class="section-title">Meet The NEACT 19</h2>
-            <p style="font-weight: 700; color: var(--coffee-light); margin-top: 15px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.12em;">The hearts behind the NEACT legacy.</p>
+            <p style="font-weight: 700; color: var(--coffee-light); margin-top: 15px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.12em;">The heartbeat of our Never Ending family.</p>
         </div>
         <div class="team-grid" id="teamGrid"></div>
     </section>
@@ -825,36 +964,241 @@
                 <i data-lucide="mail" size="24"></i>
             </a>
         </div>
-        <!-- Blurred fix: Removed reveal class here to ensure instant visibility -->
         <p class="copyright-text">&copy; <span id="year"></span> NEACT LEGACY. DESIGNED FOR MEMORIES.</p>
     </footer>
+
+    <!-- PROFILE MODAL -->
+    <div id="profileModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="closeProfileModal">
+                <i data-lucide="x" size="32"></i>
+            </button>
+            <div class="modal-avatar-wrapper">
+                <div class="modal-avatar" id="modalAvatar">?</div>
+                <div class="flag-badge" id="modalFlagBadge"></div>
+            </div>
+            <h3 class="modal-name" id="modalName">Name</h3>
+            <p class="modal-desc" id="modalDesc">Original Description</p>
+            <div class="modal-summary" id="modalSummary">Summary of the person appears here.</div>
+            <div class="modal-divider"></div>
+            <div class="modal-info-group">
+                <div class="info-item">
+                    <span class="info-label">Nationality</span>
+                    <span class="info-value" id="modalFlags">🇯🇴</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Languages</span>
+                    <span class="info-value" id="modalLang">Arabic, English</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LETTER MODAL -->
+    <div id="letterModal" class="modal-overlay">
+        <div class="modal-content letter-modal-content">
+            <button class="modal-close" id="closeLetterModal">
+                <i data-lucide="x" size="32"></i>
+            </button>
+            <div class="letter-body">
+                <p>Lately, I’ve been thinking about our time on Hilokal more than I expected to. And if you’re reading this, maybe it’s because you’ve felt that same way too.</p>
+                <p>We’ve all gone back to our “real” lives now. The tables are mostly empty, the app doesn’t feel the same, and the familiar notifications no longer light up our screens. But I couldn’t let all that silence pass without saying thank you.</p>
+                <p>When the pandemic hit and the world suddenly felt small and lonely, those tables became my entire world. We joined to practice languages, but somehow we ended up practicing how to survive a really hard chapter together. Those long nights, sometimes studying, but mostly just talking, laughing, venting, and keeping each other company when there was nowhere else to be meant more to me than I can properly explain. They kept me going.</p>
+                <p>It still amazes me how people I never met in person became such a big part of my everyday life. You weren’t just voices or avatars on a screen. You were my routine, my comfort, my sense of belonging when everything else felt uncertain. That connection was real, and it mattered.</p>
+                <p>I’m genuinely happy to see everyone moving forward now, building their lives, chasing the things we used to talk about while the world was paused. That’s what we were waiting for back then, after all, for life to start again. Still, a part of me misses those nights and the people who made them special. I’ll always carry the memory of those voices that made the lockdowns feel less heavy.</p>
+                <p>Even if we never find ourselves at the same table again, I’m deeply grateful for the time we shared. I hope you’re doing well, wherever you are. I’m quietly cheering for you.</p>
+                <div class="signature">Harry</div>
+            </div>
+        </div>
+    </div>
 
     <script>
         lucide.createIcons();
         document.getElementById('year').textContent = new Date().getFullYear();
 
         const team = [
-            { name: "Jade", desc: "Jordanian" }, { name: "Rosette", desc: "Expensive" },
-            { name: "Maple/Sophie", desc: "Kindest Bunso" }, { name: "Ginnie", desc: "Ageless" },
-            { name: "Harry", desc: "Manila Boy" }, { name: "C.A.", desc: "Future Wife of Jung Kook" },
-            { name: "Ashley", desc: "Koreana" }, { name: "Joshua", desc: "One Call Away" },
-            { name: "Shen", desc: "Stable sa Buhay" }, { name: "Dado", desc: "Future Marino" },
-            { name: "Melody", desc: "Majoring Exam" }, { name: "Wintah", desc: "From the Land of Dawn" },
-            { name: "Juan", desc: "Multitasker" }, { name: "Joy", desc: "Plato Expert" },
-            { name: "Guzman", desc: "Always Late" }, { name: "Master", desc: "Coffee is Life" },
-            { name: "Win", desc: "Music Lover" }, { name: "Ja el", desc: "Always Floating" },
-            { name: "Yvaine", desc: "Brave" }
+            { 
+                name: "Jade", 
+                desc: "The Heart of Jordan", 
+                summary: "Jade has been a pillar of the community since the Hilokal days, bringing a warm Jordanian spirit and helping bridge cultural gaps with kindness and genuine curiosity.",
+                flags: "🇵🇭 🇯🇴", 
+                lang: "Arabic, Tagalog, Cebuano, English" 
+            }, 
+            { 
+                name: "Rosette", 
+                desc: "Classy & Compassionate", 
+                summary: "Known for her sophisticated charm and deep empathy, Rosette provides a listening ear to everyone at the table, making sure no one feels left out during deep 'cheka' sessions.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, Kapampangan, English" 
+            },
+            { 
+                name: "Maple/Sophie", 
+                desc: "The Sweetest Bunso", 
+                summary: "As our beloved youngest member, Sophie brings energy and a fresh perspective to every conversation, reminding us all of the joy of discovery and new beginnings.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, English" 
+            }, 
+            { 
+                name: "Ginnie", 
+                desc: "Our Timeless Wisdom", 
+                summary: "Ginnie holds the stories of NEACT close to her heart. Her wisdom and 'ageless' spirit guide the group through challenges with grace and calm authority.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, Pangasinense, English" 
+            },
+            { 
+                name: "Harry", 
+                desc: "The Manila Boy", 
+                summary: "The creative force behind our hymn, Harry's Manila roots and musical talent gave NEACT its voice. He believes that every friendship deserves a melody.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, English" 
+            }, 
+            { 
+                name: "C.A.", 
+                desc: "The Future Dreamer", 
+                summary: "A passionate soul with big dreams and a bigger heart for K-Pop. C.A. adds a layer of fun and shared interests that keeps our chats vibrant and current.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, Iloko, English" 
+            },
+            { 
+                name: "Ashley", 
+                desc: "Multi-cultural Soul", 
+                summary: "Living between two worlds, Ashley embodies the global spirit of NEACT, effortlessly blending Korean and Filipino cultures into a unique, lovable personality.",
+                flags: "🇰🇷 🇵🇭", 
+                lang: "Korean, Tagalog, English" 
+            }, 
+            { 
+                name: "Joshua", 
+                desc: "Always Reliable Friend", 
+                summary: "If you need a hand or a midnight chat, Joshua is the 'one call away' friend. His reliability is a cornerstone of the trust we share in the Cafe.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, English" 
+            },
+            { 
+                name: "Shen", 
+                desc: "Grounding Presence", 
+                summary: "Shen's stability is what keeps the table level. In moments of chaos or high energy, her calm demeanor helps everyone find their center.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, Kapampangan, English" 
+            }, 
+            { 
+                name: "Dado", 
+                desc: "Smooth Navigator", 
+                summary: "A mariner with a love for the open sea. Dado brings a sense of adventure and steady navigation to our community's journey.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, Iloko, English" 
+            },
+            { 
+                name: "Melody", 
+                desc: "Academic Excellence", 
+                summary: "Melody balances her dedication to her studies with her commitment to our community, inspiring us all to pursue our goals while staying connected.",
+                flags: "🇮🇳", 
+                lang: "Tamil, English" 
+            }, 
+            { 
+                name: "Wintah", 
+                desc: "Dawn of the North", 
+                summary: "Wintah's presence is like a fresh morning. Her kindness and positive outlook make every day in the Never Ending Cafe feel like a new beginning.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, English" 
+            },
+            { 
+                name: "Juan", 
+                desc: "Effortless Multitasker", 
+                summary: "Juan is the master of doing it all. Whether it's managing real-life duties or keeping the table chat going, he does it with a smile and zero stress.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, English" 
+            }, 
+            { 
+                name: "Joy", 
+                desc: "Strategic Thinker", 
+                summary: "Joy's sharp mind and expert 'Plato' skills are matched only by her loyalty. She looks at the big picture and keeps the group moving forward.",
+                flags: "🇲🇾", 
+                lang: "Tagalog, Malay, Mandarin, English" 
+            },
+            { 
+                name: "Guzman", 
+                desc: "Fashionably Late", 
+                summary: "Guzman might not always be the first to arrive, but his entrance is always worth the wait. He brings style and a great sense of humor to the table.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, Cebuano, English" 
+            }, 
+            { 
+                name: "Master", 
+                desc: "Coffee Connoisseur", 
+                summary: "The ultimate host of the Cafe. Master's love for coffee and deep conversation makes her the perfect guide for new members joining our family.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, Cebuano, English" 
+            },
+            { 
+                name: "Win", 
+                desc: "Vibrant Melodies", 
+                summary: "Win's passion for music and life is contagious. She keeps our spirits high and ensures there's always a reason to celebrate our friendship.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, English" 
+            }, 
+            { 
+                name: "Ja el", 
+                desc: "The Etherial Dreamer", 
+                summary: "Ja el has a way of seeing the world differently. Her poetic and 'floating' spirit adds a touch of magic and wonder to our late-night discussions.",
+                flags: "🇵🇭 🇲🇾", 
+                lang: "Tagalog, English" 
+            },
+            { 
+                name: "Yvaine", 
+                desc: "Courageous Spirit", 
+                summary: "Brave and bold, Yvaine isn't afraid to speak her truth. Her strength inspires others to be authentic and stand tall in the face of adversity.",
+                flags: "🇵🇭", 
+                lang: "Tagalog, English" 
+            }
         ];
 
         const teamGrid = document.getElementById('teamGrid');
+        const profileModal = document.getElementById('profileModal');
+        const letterModal = document.getElementById('letterModal');
+        const modalAvatar = document.getElementById('modalAvatar');
+        const modalFlagBadge = document.getElementById('modalFlagBadge');
+        const modalName = document.getElementById('modalName');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalSummary = document.getElementById('modalSummary');
+        const modalFlags = document.getElementById('modalFlags');
+        const modalLang = document.getElementById('modalLang');
+
+        // Render Team
         team.forEach((m, i) => {
             const div = document.createElement('div');
             div.className = 'team-card reveal';
             div.style.transitionDelay = `${(i % 4) * 0.1}s`;
-            div.innerHTML = `<div class="initial-avatar">${m.name.charAt(0)}</div><h3>${m.name}</h3><p>${m.desc}</p>`;
+            div.innerHTML = `
+                <div class="avatar-wrapper">
+                    <div class="initial-avatar">${m.name.charAt(0)}</div>
+                    <div class="flag-badge">${m.flags}</div>
+                </div>
+                <h3>${m.name}</h3>
+                <p>${m.desc}</p>
+            `;
+            div.addEventListener('click', () => {
+                modalAvatar.textContent = m.name.charAt(0);
+                modalFlagBadge.textContent = m.flags;
+                modalName.textContent = m.name;
+                modalDesc.textContent = m.desc;
+                modalSummary.textContent = m.summary;
+                modalFlags.textContent = m.flags;
+                modalLang.textContent = m.lang;
+                profileModal.classList.add('active');
+            });
             teamGrid.appendChild(div);
         });
 
+        // Letter Modal logic
+        document.getElementById('openLetter').addEventListener('click', () => letterModal.classList.add('active'));
+        document.getElementById('closeLetterModal').addEventListener('click', () => letterModal.classList.remove('active'));
+        letterModal.addEventListener('click', (e) => { if(e.target === letterModal) letterModal.classList.remove('active'); });
+
+        // Close Profile Modal
+        document.getElementById('closeProfileModal').addEventListener('click', () => profileModal.classList.remove('active'));
+        profileModal.addEventListener('click', (e) => { if(e.target === profileModal) profileModal.classList.remove('active'); });
+
+        // Magnetic Effect
         const magneticElements = document.querySelectorAll('.magnetic');
         magneticElements.forEach(el => {
             el.addEventListener('mousemove', function(e) {
@@ -868,6 +1212,7 @@
             });
         });
 
+        // Custom Cursor logic
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px'; 
@@ -880,7 +1225,7 @@
             });
         });
 
-        document.querySelectorAll('a, button, .team-card, .bento-item, .social-link').forEach(el => {
+        document.querySelectorAll('a, button, .team-card, .bento-item, .social-link, .envelope-trigger').forEach(el => {
             el.addEventListener('mouseenter', () => { cursor.style.width = '50px'; cursor.style.height = '50px'; });
             el.addEventListener('mouseleave', () => { cursor.style.width = '20px'; cursor.style.height = '20px'; });
         });
@@ -931,7 +1276,7 @@
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
         function rain(count = 25) {
-            const emojis = ['🥐', '☕', '✨', '🥯'];
+            const emojis = ['🥐', '☕', '✨'];
             for(let i=0; i<count; i++) {
                 setTimeout(() => {
                     const el = document.createElement('div');
@@ -946,7 +1291,7 @@
         document.getElementById('hero').addEventListener('click', () => rain());
 
         const container = document.getElementById('bg-assets-container');
-        const emojis = ['🥐', '☕', '🥯', '✨'];
+        const emojis = ['🥐', '☕', '✨'];
         for(let i=0; i<12; i++) {
             const asset = document.createElement('div');
             asset.className = 'floating-asset';
