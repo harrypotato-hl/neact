@@ -547,6 +547,148 @@
         .bento-item:nth-child(3) { grid-column: span 1; background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800'); }
         .bento-item:nth-child(4) { grid-column: span 3; background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1600'); min-height: 400px; }
 
+        /* --- Membership Card Generator --- */
+        #membership {
+            padding: 160px 5%;
+            background: var(--cream);
+            z-index: var(--z-content);
+            text-align: center;
+        }
+        body.dark-mode #membership { background: var(--white); }
+
+        .card-generator-box {
+            max-width: 1000px;
+            margin: 60px auto 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: var(--glass-bg-dark);
+            border: 1px solid var(--glass-border);
+            padding: 60px;
+            border-radius: 60px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.05);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-controls {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        .card-controls h3 { font-size: 2rem; margin-bottom: 15px; color: var(--text-dark); }
+        .card-controls p { margin-bottom: 30px; color: var(--text-muted); font-weight: 500; }
+
+        .input-group { margin-bottom: 25px; position: relative; }
+        .input-group label { display: block; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: var(--primary); margin-bottom: 10px; }
+        .input-group input {
+            width: 100%; padding: 18px 25px; border-radius: 20px; border: 1px solid var(--glass-border);
+            background: var(--white); font-family: 'Quicksand', sans-serif; font-size: 1.1rem;
+            color: var(--text-dark); transition: border-color 0.3s;
+        }
+        .input-group input:focus { border-color: var(--primary); outline: none; }
+
+        .card-preview-area {
+            flex: 1.2;
+            min-width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #membershipCanvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 25px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            background: white;
+            border: 1px solid var(--glass-border);
+        }
+
+        .card-actions { margin-top: 30px; display: flex; gap: 15px; }
+
+        /* --- Quiz Section --- */
+        #quiz-section {
+            padding: 160px 5%;
+            background: var(--white);
+            z-index: var(--z-content);
+            text-align: center;
+        }
+        body.dark-mode #quiz-section { background: var(--cream); }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 60px auto 0;
+            background: var(--glass-bg-dark);
+            border: 1px solid var(--glass-border);
+            padding: 60px;
+            border-radius: 60px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.05);
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-step {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        .quiz-step.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-question { font-size: 1.8rem; margin-bottom: 40px; font-weight: 700; color: var(--text-dark); }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .quiz-btn {
+            background: var(--cream);
+            border: 1px solid var(--glass-border);
+            padding: 20px 30px;
+            border-radius: 30px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .quiz-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 165, 0, 0.2);
+        }
+
+        .quiz-progress {
+            margin-top: 40px;
+            height: 6px;
+            background: rgba(0,0,0,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .quiz-progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
         /* --- Hymn Section --- */
         #hymn { padding: 140px 5%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; z-index: var(--z-content); }
         .hymn-player { 
@@ -809,11 +951,16 @@
             .bento-content h3 { font-size: 1.8rem; }
             .hymn-lyrics-panel { padding: 50px 25px; } 
             .lyrics-sheet { padding: 30px 20px; }
+            .quiz-options { grid-template-columns: 1fr; }
+            .quiz-container { padding: 40px 25px; }
+            .card-generator-box { padding: 40px 25px; border-radius: 40px; }
+            .card-controls { min-width: 100%; text-align: center; }
+            .card-preview-area { min-width: 100%; }
             .team-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
             .team-card { padding: 40px 20px; }
             .avatar-wrapper { width: 60px; height: 60px; }
             .initial-avatar { font-size: 1.4rem; }
-            #team, #hymn, #message { padding: 100px 5%; min-height: auto; }
+            #team, #hymn, #message, #membership { padding: 100px 5%; min-height: auto; }
             .envelope-trigger { padding: 40px 30px; width: 100%; }
             .letter-modal-content { padding: 60px 25px; }
             .letter-body p { font-size: 1.1rem; }
@@ -847,8 +994,9 @@
                 <li><a href="#history" class="magnetic">Our Journey</a></li>
                 <li><a href="#where-are-we" class="magnetic">Global Reach</a></li>
                 <li><a href="#who-we-are" class="magnetic">Who We Are</a></li>
+                <li><a href="#membership" class="magnetic">Member ID</a></li>
+                <li><a href="#quiz-section" class="magnetic">The Table Test</a></li>
                 <li><a href="#hymn" class="magnetic">Hymn</a></li>
-                <li><a href="#message" class="magnetic">A Note</a></li>
                 <li><a href="#team" class="magnetic">The 19</a></li>
                 <li>
                     <button class="theme-toggle magnetic" id="themeToggle" title="Switch Theme">
@@ -981,6 +1129,77 @@
         </div>
     </section>
 
+    <!-- MEMBERSHIP CARD SECTION -->
+    <section id="membership">
+        <div class="section-header reveal">
+            <h2 class="section-title">Get Your Member ID</h2>
+            <p class="section-sub">You're officially one of us. Personalize your NEACT digital ID card below.</p>
+        </div>
+
+        <div class="card-generator-box reveal">
+            <div class="card-controls">
+                <h3>Identity Builder</h3>
+                <p>Enter your nickname to personalize your official Never Ending and Croissant Table membership card.</p>
+                
+                <div class="input-group">
+                    <label for="memberNameInput">Member Nickname</label>
+                    <input type="text" id="memberNameInput" placeholder="e.g. BreadLover_99" maxlength="18">
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn-main magnetic" id="downloadCardBtn">
+                        <i data-lucide="download"></i> Download ID
+                    </button>
+                    <button class="quiz-btn magnetic" style="padding: 18px 25px;" id="refreshCardBtn">
+                        <i data-lucide="refresh-cw"></i> Randomize ID
+                    </button>
+                </div>
+            </div>
+
+            <div class="card-preview-area">
+                <canvas id="membershipCanvas" width="600" height="350"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ SECTION -->
+    <section id="quiz-section">
+        <div class="section-header reveal">
+            <h2 class="section-title">The Table Test</h2>
+            <p class="section-sub">Which NEACT member are you actually? Take the quiz to find your vibe.</p>
+        </div>
+        
+        <div class="quiz-container reveal">
+            <!-- Start Screen -->
+            <div class="quiz-step active" id="quiz-start">
+                <div class="quiz-question">Ready to find your NEACT counterpart?</div>
+                <button class="btn-main magnetic" onclick="startQuiz()">
+                    Start the Quiz <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Question Template (Dynamic) -->
+            <div class="quiz-step" id="quiz-q">
+                <div class="quiz-question" id="q-text">Question goes here?</div>
+                <div class="quiz-options" id="q-options">
+                    <!-- Buttons will be injected here -->
+                </div>
+            </div>
+
+            <!-- Loading/Result Trigger -->
+            <div class="quiz-step" id="quiz-loading">
+                <div class="quiz-question">Consulting the Croissant Table...</div>
+                <div class="social-icons" style="justify-content: center;">
+                    <i data-lucide="coffee" class="spin" style="animation: logo-spin 1.5s infinite linear;"></i>
+                </div>
+            </div>
+
+            <div class="quiz-progress">
+                <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+            </div>
+        </div>
+    </section>
+
     <section id="hymn">
         <div class="section-header reveal">
             <h2 class="section-title">The NEACT Hymn</h2>
@@ -1097,178 +1316,246 @@
         document.getElementById('year').textContent = new Date().getFullYear();
 
         const team = [
-            { 
-                name: "Jade", 
-                desc: "The Heart of Jordan", 
-                summary: "Jade has been a pillar of the community since the Hilokal days, bringing a warm Jordanian spirit and helping bridge cultural gaps with kindness and genuine curiosity.",
-                flags: "🇵🇭 🇯🇴", 
-                lang: "Arabic, Tagalog, Cebuano, English",
-                avatar: "jade-avatar.jpg",
-                lat: 31.9454, lng: 35.9284 
-            }, 
-            { 
-                name: "Rosette", 
-                desc: "Classy & Compassionate", 
-                summary: "Known for her sophisticated charm and deep empathy, Rosette provides a listening ear to everyone at the table, making sure no one feels left out during deep 'cheka' sessions.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, Kapampangan, English",
-                avatar: "rosette-avatar.jpg",
-                lat: 15.0286, lng: 120.6898 
+            { id: "jade", name: "Jade", desc: "The Heart of Jordan", summary: "Jade has been a pillar of the community since the Hilokal days, bringing a warm Jordanian spirit and helping bridge cultural gaps with kindness and genuine curiosity.", flags: "🇵🇭 🇯🇴", lang: "Arabic, Tagalog, Cebuano, English", avatar: "jade-avatar.jpg", lat: 31.9454, lng: 35.9284, traits: ['bridging', 'warm', 'kind'] }, 
+            { id: "rosette", name: "Rosette", desc: "Classy & Compassionate", summary: "Known for her sophisticated charm and deep empathy, Rosette provides a listening ear to everyone at the table, making sure no one feels left out during deep 'cheka' sessions.", flags: "🇵🇭", lang: "Tagalog, Kapampangan, English", avatar: "rosette-avatar.jpg", lat: 15.0286, lng: 120.6898, traits: ['empathy', 'classy', 'listening'] },
+            { id: "sophie", name: "Maple/Sophie", desc: "The Sweetest Bunso", summary: "As our beloved youngest member, Sophie brings energy and a fresh perspective to every conversation, reminding us all of the joy of discovery and new beginnings.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "maple-avatar.jpg", lat: 14.5995, lng: 120.9842, traits: ['young', 'energy', 'fresh'] }, 
+            { id: "ginnie", name: "Ginnie", desc: "Our Timeless Wisdom", summary: "Ginnie holds the stories of NEACT close to her heart. Her wisdom and 'ageless' spirit guide the group through challenges with grace and calm authority.", flags: "🇵🇭", lang: "Tagalog, Pangasinense, English", avatar: "ginnie-avatar.jpg", lat: 16.0355, lng: 120.3311, traits: ['wisdom', 'guiding', 'calm'] },
+            { id: "harry", name: "Harry", desc: "The Manila Boy", summary: "The creative force behind our hymn, Harry's Manila roots and musical talent gave NEACT its voice. He believes that every friendship deserves a melody.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "harry-avatar.jpg", lat: 14.5800, lng: 121.0300, traits: ['creative', 'musical', 'voice'] }, 
+            { id: "ca", name: "C.A.", desc: "The Future Dreamer", summary: "A passionate soul with big dreams and a bigger heart for K-Pop. C.A. adds a layer of fun and shared interests that keeps our chats vibrant and current.", flags: "🇵🇭", lang: "Tagalog, Iloko, English", avatar: "ca-avatar.jpg", lat: 17.5700, lng: 120.3800, traits: ['dreamer', 'passionate', 'fun'] },
+            { id: "ashley", name: "Ashley", desc: "Multi-cultural Soul", summary: "Living between two worlds, Ashley embodies the global spirit of NEACT, effortlessly blending Korean and Filipino cultures into a unique, lovable personality.", flags: "🇰🇷 🇵🇭", lang: "Korean, Tagalog, English", avatar: "ashley-avatar.jpg", lat: 37.5665, lng: 126.9780, traits: ['global', 'blending', 'lovable'] }, 
+            { id: "joshua", name: "Joshua", desc: "Always Reliable Friend", summary: "If you need a hand or a midnight chat, Joshua is the 'one call away' friend. His reliability is a cornerstone of the trust we share in the Cafe.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "joshua-avatar.jpg", lat: 14.4081, lng: 121.0415, traits: ['reliable', 'trust', 'supportive'] },
+            { id: "shen", name: "Shen", desc: "Grounding Presence", summary: "Shen's stability is what keeps the table level. In moments of chaos or high energy, her calm demeanor helps everyone find their center.", flags: "🇵🇭", lang: "Tagalog, Kapampangan, English", avatar: "shen-avatar.jpg", lat: 15.0800, lng: 120.5900, traits: ['stability', 'center', 'grounding'] }, 
+            { id: "dado", name: "Dado", desc: "Smooth Navigator", summary: "A mariner with a love for the open sea. Dado brings a sense of adventure and steady navigation to our community's journey.", flags: "🇵🇭", lang: "Tagalog, Iloko, English", avatar: "dado-avatar.jpg", lat: 12.8797, lng: 121.7740, traits: ['adventure', 'steady', 'navigator'] },
+            { id: "melody", name: "Melody", desc: "Academic Excellence", summary: "Melody balances her dedication to her studies with her commitment to our community, inspiring us all to pursue our goals while staying connected.", flags: "🇮🇳", lang: "Tamil, English", avatar: "melody-avatar.jpg", lat: 13.0827, lng: 80.2707, traits: ['academic', 'excellence', 'goals'] }, 
+            { id: "wintah", name: "Wintah", desc: "Dawn of the North", summary: "Wintah's presence is like a fresh morning. Her kindness and positive outlook make every day in the Never Ending Cafe feel like a new beginning.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "wintah-avatar.jpg", lat: 18.2164, lng: 120.5930, traits: ['fresh', 'positive', 'dawn'] },
+            { id: "juan", name: "Juan", desc: "Effortless Multitasker", summary: "Juan is the master of doing it all. Whether it's managing real-life duties or keeping the table chat going, he does it with a smile and zero stress.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "juan-avatar.jpg", lat: 14.6760, lng: 121.0437, traits: ['multitasker', 'zero-stress', 'smiles'] }, 
+            { id: "joy", name: "Joy", desc: "Strategic Thinker", summary: "Joy's sharp mind and expert 'Plato' skills are matched only by her loyalty. She looks at the big picture and keeps the group moving forward.", flags: "🇲🇾", lang: "Tagalog, Malay, Mandarin, English", avatar: "joy-avatar.jpg", lat: 3.1390, lng: 101.6869, traits: ['strategic', 'sharp', 'loyalty'] },
+            { id: "guzman", name: "Guzman", desc: "Fashionably Late", summary: "Guzman might not always be the first to arrive, but his entrance is always worth the wait. He brings style and a great sense of humor to the table.", flags: "🇵🇭", lang: "Tagalog, Cebuano, English", avatar: "guzman-avatar.jpg", lat: 10.3157, lng: 123.8854, traits: ['humor', 'style', 'relaxed'] }, 
+            { id: "master", name: "Master", desc: "Coffee Connoisseur", summary: "The ultimate host of the Cafe. Master's love for coffee and deep conversation makes her the perfect guide for new members joining our family.", flags: "🇵🇭", lang: "Tagalog, Cebuano, English", avatar: "master-avatar.jpg", lat: 7.1907, lng: 125.4553, traits: ['host', 'guide', 'coffee'] },
+            { id: "win", name: "Win", desc: "Vibrant Melodies", summary: "Win's passion for music and life is contagious. She keeps our spirits high and ensures there's always a reason to celebrate our friendship.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "win-avatar.jpg", lat: 13.1391, lng: 123.7438, traits: ['vibrant', 'celebrate', 'contagious'] }, 
+            { id: "jael", name: "Ja el", desc: "The Etherial Dreamer", summary: "Ja el has a way of seeing the world differently. Her poetic and 'floating' spirit adds a touch of magic and wonder to our late-night discussions.", flags: "🇵🇭 🇲🇾", lang: "Tagalog, English", avatar: "jael-avatar.jpg", lat: 1.5533, lng: 103.6356, traits: ['poetic', 'magic', 'dreamer'] },
+            { id: "yvaine", name: "Yvaine", desc: "Courageous Spirit", summary: "Brave and bold, Yvaine isn't afraid to speak her truth. Her strength inspires others to be authentic and stand tall in the face of adversity.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "yvaine-avatar.jpg", lat: 14.5547, lng: 121.0244, traits: ['courage', 'bold', 'authentic'] }
+        ];
+
+        // Membership Card Logic
+        const cardCanvas = document.getElementById('membershipCanvas');
+        const ctx = cardCanvas.getContext('2d');
+        const nameInput = document.getElementById('memberNameInput');
+        const downloadBtn = document.getElementById('downloadCardBtn');
+        const refreshBtn = document.getElementById('refreshCardBtn');
+        let currentMemberID = Math.floor(1000 + Math.random() * 9000);
+
+        function drawCard() {
+            const name = nameInput.value || "NEACT Member";
+            const dateStr = "Est. August 2021";
+            
+            // Background
+            const gradient = ctx.createLinearGradient(0, 0, 600, 350);
+            gradient.addColorStop(0, '#FFA500'); // Primary
+            gradient.addColorStop(1, '#FFB732'); // Primary Light
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 600, 350);
+
+            // Pattern / Accents
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.beginPath();
+            ctx.arc(600, 0, 200, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(0, 350, 150, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Glass Panel
+            ctx.fillStyle = 'rgba(255, 253, 245, 0.2)';
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.roundRect(30, 30, 540, 290, 30);
+            ctx.fill();
+            ctx.stroke();
+
+            // Logo
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 36px Lexend, sans-serif';
+            ctx.fillText('NEACT', 60, 85);
+            
+            // Tagline
+            ctx.font = '600 12px Lexend, sans-serif';
+            ctx.fillText('NEVER ENDING & CROISSANT TABLE', 60, 105);
+
+            // Member Badge
+            ctx.fillStyle = '#6F4E37'; // Coffee
+            ctx.roundRect(410, 60, 130, 30, 15);
+            ctx.fill();
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = '800 12px Quicksand, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('OFFICIAL MEMBER', 475, 80);
+            ctx.textAlign = 'left';
+
+            // Member Name
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = '800 48px Lexend, sans-serif';
+            ctx.fillText(name.toUpperCase(), 60, 230);
+
+            // ID Details
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.font = 'bold 12px Quicksand, sans-serif';
+            ctx.fillText('MEMBER ID:', 60, 270);
+            ctx.fillText('LEGACY SINCE:', 200, 270);
+            
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = '800 16px Quicksand, sans-serif';
+            ctx.fillText(`#${currentMemberID}`, 60, 290);
+            ctx.fillText('AUG 2021', 200, 290);
+
+            // Croissant Emoji
+            ctx.font = '60px Arial';
+            ctx.fillText('🥐', 470, 290);
+            
+            // QR Placeholder
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(510, 120, 30, 30);
+            ctx.beginPath();
+            ctx.moveTo(510, 120); ctx.lineTo(540, 150);
+            ctx.moveTo(540, 120); ctx.lineTo(510, 150);
+            ctx.stroke();
+        }
+
+        nameInput.addEventListener('input', drawCard);
+        refreshBtn.addEventListener('click', () => {
+            currentMemberID = Math.floor(1000 + Math.random() * 9000);
+            drawCard();
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = `NEACT_Member_${nameInput.value || 'ID'}.png`;
+            link.href = cardCanvas.toDataURL();
+            link.click();
+        });
+
+        // Quiz Logic
+        const quizData = [
+            {
+                question: "What's your ideal role at a never-ending table?",
+                options: [
+                    { text: "The host who makes everyone feel at home", traits: ['host', 'bridging', 'guide'] },
+                    { text: "The listener who gives deep advice", traits: ['wisdom', 'empathy', 'listening'] },
+                    { text: "The one keeping the vibes high and loud", traits: ['energy', 'fun', 'vibrant'] },
+                    { text: "The steady presence in the background", traits: ['stability', 'center', 'grounding'] }
+                ]
             },
-            { 
-                name: "Maple/Sophie", 
-                desc: "The Sweetest Bunso", 
-                summary: "As our beloved youngest member, Sophie brings energy and a fresh perspective to every conversation, reminding us all of the joy of discovery and new beginnings.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, English",
-                avatar: "maple-avatar.jpg",
-                lat: 14.5995, lng: 120.9842 
-            }, 
-            { 
-                name: "Ginnie", 
-                desc: "Our Timeless Wisdom", 
-                summary: "Ginnie holds the stories of NEACT close to her heart. Her wisdom and 'ageless' spirit guide the group through challenges with grace and calm authority.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, Pangasinense, English",
-                avatar: "ginnie-avatar.jpg",
-                lat: 16.0355, lng: 120.3311 
+            {
+                question: "Pick your favorite late-night snack vibe.",
+                options: [
+                    { text: "A fresh croissant and warm coffee", traits: ['coffee', 'fresh', 'classy'] },
+                    { text: "Street food and a good laugh", traits: ['humor', 'smiles', 'relaxed'] },
+                    { text: "Something new and international", traits: ['global', 'blending', 'adventure'] },
+                    { text: "Whatever is nearby, I'm multitasking anyway", traits: ['multitasker', 'zero-stress', 'steady'] }
+                ]
             },
-            { 
-                name: "Harry", 
-                desc: "The Manila Boy", 
-                summary: "The creative force behind our hymn, Harry's Manila roots and musical talent gave NEACT its voice. He believes that every friendship deserves a melody.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, English",
-                avatar: "harry-avatar.jpg",
-                lat: 14.5800, lng: 121.0300 
-            }, 
-            { 
-                name: "C.A.", 
-                desc: "The Future Dreamer", 
-                summary: "A passionate soul with big dreams and a bigger heart for K-Pop. C.A. adds a layer of fun and shared interests that keeps our chats vibrant and current.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, Iloko, English",
-                avatar: "ca-avatar.jpg",
-                lat: 17.5700, lng: 120.3800 
+            {
+                question: "If you were to create something for the group...",
+                options: [
+                    { text: "A song or a melody", traits: ['creative', 'musical', 'voice'] },
+                    { text: "A strategic plan for the future", traits: ['strategic', 'sharp', 'excellence'] },
+                    { text: "A safe space for others to vent", traits: ['supportive', 'reliable', 'trust'] },
+                    { text: "A poetic piece about our bond", traits: ['poetic', 'magic', 'dreamer'] }
+                ]
             },
-            { 
-                name: "Ashley", 
-                desc: "Multi-cultural Soul", 
-                summary: "Living between two worlds, Ashley embodies the global spirit of NEACT, effortlessly blending Korean and Filipino cultures into a unique, lovable personality.",
-                flags: "🇰🇷 🇵🇭", 
-                lang: "Korean, Tagalog, English",
-                avatar: "ashley-avatar.jpg",
-                lat: 37.5665, lng: 126.9780 
-            }, 
-            { 
-                name: "Joshua", 
-                desc: "Always Reliable Friend", 
-                summary: "If you need a hand or a midnight chat, Joshua is the 'one call away' friend. His reliability is a cornerstone of the trust we share in the Cafe.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, English",
-                avatar: "joshua-avatar.jpg",
-                lat: 14.4081, lng: 121.0415 
-            },
-            { 
-                name: "Shen", 
-                desc: "Grounding Presence", 
-                summary: "Shen's stability is what keeps the table level. In moments of chaos or high energy, her calm demeanor helps everyone find their center.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, Kapampangan, English",
-                avatar: "shen-avatar.jpg",
-                lat: 15.0800, lng: 120.5900 
-            }, 
-            { 
-                name: "Dado", 
-                desc: "Smooth Navigator", 
-                summary: "A mariner with a love for the open sea. Dado brings a sense of adventure and steady navigation to our community's journey.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, Iloko, English",
-                avatar: "dado-avatar.jpg",
-                lat: 12.8797, lng: 121.7740 
-            },
-            { 
-                name: "Melody", 
-                desc: "Academic Excellence", 
-                summary: "Melody balances her dedication to her studies with her commitment to our community, inspiring us all to pursue our goals while staying connected.",
-                flags: "🇮🇳", 
-                lang: "Tamil, English",
-                avatar: "melody-avatar.jpg",
-                lat: 13.0827, lng: 80.2707 
-            }, 
-            { 
-                name: "Wintah", 
-                desc: "Dawn of the North", 
-                summary: "Wintah's presence is like a fresh morning. Her kindness and positive outlook make every day in the Never Ending Cafe feel like a new beginning.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, English",
-                avatar: "wintah-avatar.jpg",
-                lat: 18.2164, lng: 120.5930 
-            },
-            { 
-                name: "Juan", 
-                desc: "Effortless Multitasker", 
-                summary: "Juan is the master of doing it all. Whether it's managing real-life duties or keeping the table chat going, he does it with a smile and zero stress.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, English",
-                avatar: "juan-avatar.jpg",
-                lat: 14.6760, lng: 121.0437 
-            }, 
-            { 
-                name: "Joy", 
-                desc: "Strategic Thinker", 
-                summary: "Joy's sharp mind and expert 'Plato' skills are matched only by her loyalty. She looks at the big picture and keeps the group moving forward.",
-                flags: "🇲🇾", 
-                lang: "Tagalog, Malay, Mandarin, English",
-                avatar: "joy-avatar.jpg",
-                lat: 3.1390, lng: 101.6869 
-            },
-            { 
-                name: "Guzman", 
-                desc: "Fashionably Late", 
-                summary: "Guzman might not always be the first to arrive, but his entrance is always worth the wait. He brings style and a great sense of humor to the table.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, Cebuano, English",
-                avatar: "guzman-avatar.jpg",
-                lat: 10.3157, lng: 123.8854 
-            }, 
-            { 
-                name: "Master", 
-                desc: "Coffee Connoisseur", 
-                summary: "The ultimate host of the Cafe. Master's love for coffee and deep conversation makes her the perfect guide for new members joining our family.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, Cebuano, English",
-                avatar: "master-avatar.jpg",
-                lat: 7.1907, lng: 125.4553 
-            },
-            { 
-                name: "Win", 
-                desc: "Vibrant Melodies", 
-                summary: "Win's passion for music and life is contagious. She keeps our spirits high and ensures there's always a reason to celebrate our friendship.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, English",
-                avatar: "win-avatar.jpg",
-                lat: 13.1391, lng: 123.7438 
-            }, 
-            { 
-                name: "Ja el", 
-                desc: "The Etherial Dreamer", 
-                summary: "Ja el has a way of seeing the world differently. Her poetic and 'floating' spirit adds a touch of magic and wonder to our late-night discussions.",
-                flags: "🇵🇭 🇲🇾", 
-                lang: "Tagalog, English",
-                avatar: "jael-avatar.jpg",
-                lat: 1.5533, lng: 103.6356 
-            },
-            { 
-                name: "Yvaine", 
-                desc: "Courageous Spirit", 
-                summary: "Brave and bold, Yvaine isn't afraid to speak her truth. Her strength inspires others to be authentic and stand tall in the face of adversity.",
-                flags: "🇵🇭", 
-                lang: "Tagalog, English",
-                avatar: "yvaine-avatar.jpg",
-                lat: 14.5547, lng: 121.0244 
+            {
+                question: "How do you handle a chaotic situation?",
+                options: [
+                    { text: "I stay calm and speak my truth", traits: ['courage', 'authentic', 'bold'] },
+                    { text: "I try to guide everyone toward a solution", traits: ['wisdom', 'guiding', 'center'] },
+                    { text: "I lighten the mood with a joke", traits: ['humor', 'fun', 'relaxed'] },
+                    { text: "I reliably show up for those who need me", traits: ['reliable', 'supportive', 'warm'] }
+                ]
             }
         ];
+
+        let currentQ = 0;
+        let userPoints = {};
+
+        function startQuiz() {
+            document.getElementById('quiz-start').classList.remove('active');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = quizData[currentQ];
+            const qContainer = document.getElementById('quiz-q');
+            const qText = document.getElementById('q-text');
+            const qOptions = document.getElementById('q-options');
+            const progressBar = document.getElementById('quiz-progress-bar');
+
+            qText.textContent = q.question;
+            qOptions.innerHTML = '';
+            
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-btn magnetic';
+                btn.innerHTML = `<i data-lucide="circle" size="18"></i> ${opt.text}`;
+                btn.onclick = () => handleAnswer(opt.traits);
+                qOptions.appendChild(btn);
+            });
+
+            lucide.createIcons();
+            qContainer.classList.add('active');
+            progressBar.style.width = `${(currentQ / quizData.length) * 100}%`;
+        }
+
+        function handleAnswer(traits) {
+            traits.forEach(t => {
+                userPoints[t] = (userPoints[t] || 0) + 1;
+            });
+
+            currentQ++;
+            document.getElementById('quiz-q').classList.remove('active');
+
+            if (currentQ < quizData.length) {
+                setTimeout(showQuestion, 300);
+            } else {
+                showLoading();
+            }
+        }
+
+        function showLoading() {
+            document.getElementById('quiz-progress-bar').style.width = '100%';
+            const loader = document.getElementById('quiz-loading');
+            loader.classList.add('active');
+            
+            setTimeout(() => {
+                loader.classList.remove('active');
+                calculateResult();
+            }, 1500);
+        }
+
+        function calculateResult() {
+            let bestMatch = team[0];
+            let maxScore = -1;
+
+            team.forEach(member => {
+                let score = 0;
+                member.traits.forEach(trait => {
+                    if (userPoints[trait]) score += userPoints[trait];
+                });
+                if (score > maxScore) {
+                    maxScore = score;
+                    bestMatch = member;
+                }
+            });
+
+            openProfileModal(bestMatch);
+            const modalNameEl = document.getElementById('modalName');
+            modalNameEl.innerHTML = `<span style="display:block; font-size: 0.9rem; color: var(--primary); letter-spacing: 2px;">YOUR MATCH IS:</span> ${bestMatch.name}`;
+            
+            currentQ = 0;
+            userPoints = {};
+            document.getElementById('quiz-start').classList.add('active');
+            document.getElementById('quiz-progress-bar').style.width = '0%';
+        }
 
         const profileModal = document.getElementById('profileModal');
         const modalAvatar = document.getElementById('modalAvatar');
@@ -1279,7 +1566,6 @@
         const modalFlags = document.getElementById('modalFlags');
         const modalLang = document.getElementById('modalLang');
 
-        // Helper function to handle Avatar Rendering
         function renderAvatarContent(name, avatarUrl) {
             const firstLetter = name.charAt(0);
             if (avatarUrl && avatarUrl.trim() !== "") {
@@ -1288,7 +1574,6 @@
             return firstLetter;
         }
 
-        // Shared function to open profile modal
         function openProfileModal(m) {
             modalAvatar.innerHTML = renderAvatarContent(m.name, m.avatar);
             modalFlagBadge.textContent = m.flags;
@@ -1300,7 +1585,6 @@
             profileModal.classList.add('active');
         }
 
-        // Initialize Map
         function initMap() {
             const map = L.map('map', {
                 scrollWheelZoom: false,
@@ -1314,7 +1598,6 @@
             const markers = [];
 
             team.forEach(m => {
-                // Create custom div icon using the member's avatar
                 const iconContent = m.avatar 
                     ? `<img src="${m.avatar}" onerror="this.parentElement.innerHTML='<div class=map-avatar-fallback>${m.name[0]}</div>'">`
                     : `<div class="map-avatar-fallback">${m.name[0]}</div>`;
@@ -1327,11 +1610,9 @@
                 });
 
                 const marker = L.marker([m.lat, m.lng], { icon: customIcon }).addTo(map);
-                
                 marker.on('click', () => {
                     openProfileModal(m);
                 });
-
                 markers.push(marker);
             });
 
@@ -1339,7 +1620,6 @@
             map.fitBounds(group.getBounds().pad(0.2));
         }
 
-        // Render Team Grid
         const teamGrid = document.getElementById('teamGrid');
         team.forEach((m, i) => {
             const div = document.createElement('div');
@@ -1363,22 +1643,18 @@
             teamGrid.appendChild(div);
         });
 
-        // Initialize components on load
         window.onload = () => {
             initMap();
+            drawCard(); // Initial card render
         };
 
-        // Letter Modal logic
         const letterModal = document.getElementById('letterModal');
         document.getElementById('openLetter').addEventListener('click', () => letterModal.classList.add('active'));
         document.getElementById('closeLetterModal').addEventListener('click', () => letterModal.classList.remove('active'));
-        letterModal.addEventListener('click', (e) => { if(e.target === letterModal) letterModal.classList.remove('active'); });
-
-        // Close Profile Modal
+        
         document.getElementById('closeProfileModal').addEventListener('click', () => profileModal.classList.remove('active'));
         profileModal.addEventListener('click', (e) => { if(e.target === profileModal) profileModal.classList.remove('active'); });
 
-        // Magnetic Effect
         const magneticElements = document.querySelectorAll('.magnetic');
         magneticElements.forEach(el => {
             el.addEventListener('mousemove', function(e) {
@@ -1387,25 +1663,16 @@
                 const y = e.clientY - pos.top - pos.height / 2;
                 el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
             });
-            el.addEventListener('mouseleave', function() {
-                el.style.transform = `translate(0, 0)`;
-            });
+            el.addEventListener('mouseleave', function() { el.style.transform = `translate(0, 0)`; });
         });
 
-        // Custom Cursor logic
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px'; 
             cursor.style.top = e.clientY + 'px';
-            document.querySelectorAll('.floating-asset').forEach(asset => {
-                const speed = parseFloat(asset.getAttribute('data-speed'));
-                const x = (window.innerWidth - e.pageX * speed) / 100;
-                const y = (window.innerHeight - e.pageY * speed) / 100;
-                asset.style.transform = `translateX(${x}px) translateY(${y}px)`;
-            });
         });
 
-        document.querySelectorAll('a, button, .team-card, .bento-item, .social-link, .envelope-trigger, .map-avatar-marker').forEach(el => {
+        document.querySelectorAll('a, button, .team-card, .quiz-btn, .bento-item, .social-link, .envelope-trigger, .map-avatar-marker').forEach(el => {
             el.addEventListener('mouseenter', () => { cursor.style.width = '50px'; cursor.style.height = '50px'; });
             el.addEventListener('mouseleave', () => { cursor.style.width = '20px'; cursor.style.height = '20px'; });
         });
@@ -1423,10 +1690,8 @@
         const updateThemeIcon = (isDark) => {
             themeToggle.innerHTML = `<i data-lucide="${isDark ? 'moon' : 'sun'}"></i>`;
             lucide.createIcons();
+            setTimeout(drawCard, 100); // Redraw card for theme context if needed
         };
-        const savedTheme = localStorage.getItem('neact-theme');
-        if (savedTheme === 'dark') { body.classList.add('dark-mode'); updateThemeIcon(true); }
-
         themeToggle.addEventListener('click', () => {
             const isDark = body.classList.toggle('dark-mode');
             localStorage.setItem('neact-theme', isDark ? 'dark' : 'light');
@@ -1445,7 +1710,6 @@
         const sceneObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
-                else entry.target.classList.remove('active');
             });
         }, { threshold: 0.5 });
         document.querySelectorAll('.scene').forEach(scene => sceneObserver.observe(scene));
@@ -1467,19 +1731,6 @@
                     setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 1000); }, 4000);
                 }, i * 80);
             }
-        }
-        document.getElementById('hero').addEventListener('click', () => rain());
-
-        const container = document.getElementById('bg-assets-container');
-        const emojis = ['🥐', '☕', '✨'];
-        for(let i=0; i<12; i++) {
-            const asset = document.createElement('div');
-            asset.className = 'floating-asset';
-            asset.textContent = emojis[i % emojis.length];
-            asset.style.top = (Math.random() * 90 + 5) + 'vh';
-            asset.style.left = (Math.random() * 90 + 5) + 'vw';
-            asset.setAttribute('data-speed', (Math.random() * 2) + 0.5);
-            container.appendChild(asset);
         }
 
         window.addEventListener('scroll', () => {
