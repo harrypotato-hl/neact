@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Leaflet CSS for the Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <style>
         :root {
             /* Theme Variables - Default (Light) */
@@ -431,6 +433,61 @@
             box-shadow: 0 0 20px var(--primary);
         }
 
+        /* --- Map Section Styling --- */
+        #where-are-we {
+            padding: 160px 5%;
+            background: var(--white);
+            z-index: var(--z-content);
+            transition: background 0.5s ease;
+        }
+        body.dark-mode #where-are-we { background: var(--cream); }
+
+        #map-container {
+            width: 100%;
+            height: 600px;
+            border-radius: 60px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* Leaflet Overrides */
+        .leaflet-container { font-family: 'Quicksand', sans-serif; background: var(--cream); }
+        
+        /* Custom Avatar Marker Style */
+        .map-avatar-marker {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 3px solid var(--white);
+            background: var(--primary);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease;
+            cursor: pointer;
+        }
+        .map-avatar-marker:hover {
+            transform: scale(1.3) translateY(-8px);
+            border-color: var(--primary);
+            z-index: 1000 !important;
+        }
+        .map-avatar-marker img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .map-avatar-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
         /* --- Who We Are (Refined Bento Grid) --- */
         #who-we-are { 
             padding: 160px 5%; 
@@ -745,6 +802,8 @@
             .scene h3 { font-size: 2.2rem; }
             .scene p { font-size: 1.15rem; }
             #who-we-are { padding: 100px 5%; }
+            #where-are-we { padding: 100px 5%; }
+            #map-container { height: 400px; border-radius: 40px; }
             .bento-grid { grid-template-columns: 1fr; gap: 16px; }
             .bento-item { grid-column: span 1 !important; min-height: 320px !important; padding: 35px; }
             .bento-content h3 { font-size: 1.8rem; }
@@ -786,6 +845,7 @@
             </a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#history" class="magnetic">Our Journey</a></li>
+                <li><a href="#where-are-we" class="magnetic">Global Reach</a></li>
                 <li><a href="#who-we-are" class="magnetic">Who We Are</a></li>
                 <li><a href="#hymn" class="magnetic">Hymn</a></li>
                 <li><a href="#message" class="magnetic">A Note</a></li>
@@ -874,6 +934,17 @@
                     <p>Due to rising popularity, we opened the <strong>Never Ending Cafe</strong>. Since then, NEACT has expanded as a solid community, broadening horizons across global boundaries.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- WHERE ARE WE MAP SECTION -->
+    <section id="where-are-we">
+        <div class="section-header reveal">
+            <h2 class="section-title">Where Are We?</h2>
+            <p class="section-sub">A global family across oceans and borders. Click an avatar to say hi!</p>
+        </div>
+        <div id="map-container" class="reveal">
+            <div id="map" style="width: 100%; height: 100%;"></div>
         </div>
     </section>
 
@@ -1019,6 +1090,8 @@
         </div>
     </div>
 
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         lucide.createIcons();
         document.getElementById('year').textContent = new Date().getFullYear();
@@ -1030,7 +1103,8 @@
                 summary: "Jade has been a pillar of the community since the Hilokal days, bringing a warm Jordanian spirit and helping bridge cultural gaps with kindness and genuine curiosity.",
                 flags: "🇵🇭 🇯🇴", 
                 lang: "Arabic, Tagalog, Cebuano, English",
-                avatar: "jade-avatar.jpg" 
+                avatar: "jade-avatar.jpg",
+                lat: 31.9454, lng: 35.9284 
             }, 
             { 
                 name: "Rosette", 
@@ -1038,7 +1112,8 @@
                 summary: "Known for her sophisticated charm and deep empathy, Rosette provides a listening ear to everyone at the table, making sure no one feels left out during deep 'cheka' sessions.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, Kapampangan, English",
-                avatar: "rosette-avatar.jpg" 
+                avatar: "rosette-avatar.jpg",
+                lat: 15.0286, lng: 120.6898 
             },
             { 
                 name: "Maple/Sophie", 
@@ -1046,7 +1121,8 @@
                 summary: "As our beloved youngest member, Sophie brings energy and a fresh perspective to every conversation, reminding us all of the joy of discovery and new beginnings.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, English",
-                avatar: "maple-avatar.jpg" 
+                avatar: "maple-avatar.jpg",
+                lat: 14.5995, lng: 120.9842 
             }, 
             { 
                 name: "Ginnie", 
@@ -1054,7 +1130,8 @@
                 summary: "Ginnie holds the stories of NEACT close to her heart. Her wisdom and 'ageless' spirit guide the group through challenges with grace and calm authority.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, Pangasinense, English",
-                avatar: "ginnie-avatar.jpg" 
+                avatar: "ginnie-avatar.jpg",
+                lat: 16.0355, lng: 120.3311 
             },
             { 
                 name: "Harry", 
@@ -1062,7 +1139,8 @@
                 summary: "The creative force behind our hymn, Harry's Manila roots and musical talent gave NEACT its voice. He believes that every friendship deserves a melody.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, English",
-                avatar: "harry-avatar.jpg" 
+                avatar: "harry-avatar.jpg",
+                lat: 14.5800, lng: 121.0300 
             }, 
             { 
                 name: "C.A.", 
@@ -1070,7 +1148,8 @@
                 summary: "A passionate soul with big dreams and a bigger heart for K-Pop. C.A. adds a layer of fun and shared interests that keeps our chats vibrant and current.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, Iloko, English",
-                avatar: "ca-avatar.jpg" 
+                avatar: "ca-avatar.jpg",
+                lat: 17.5700, lng: 120.3800 
             },
             { 
                 name: "Ashley", 
@@ -1078,7 +1157,8 @@
                 summary: "Living between two worlds, Ashley embodies the global spirit of NEACT, effortlessly blending Korean and Filipino cultures into a unique, lovable personality.",
                 flags: "🇰🇷 🇵🇭", 
                 lang: "Korean, Tagalog, English",
-                avatar: "ashley-avatar.jpg" 
+                avatar: "ashley-avatar.jpg",
+                lat: 37.5665, lng: 126.9780 
             }, 
             { 
                 name: "Joshua", 
@@ -1086,7 +1166,8 @@
                 summary: "If you need a hand or a midnight chat, Joshua is the 'one call away' friend. His reliability is a cornerstone of the trust we share in the Cafe.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, English",
-                avatar: "joshua-avatar.jpg" 
+                avatar: "joshua-avatar.jpg",
+                lat: 14.4081, lng: 121.0415 
             },
             { 
                 name: "Shen", 
@@ -1094,7 +1175,8 @@
                 summary: "Shen's stability is what keeps the table level. In moments of chaos or high energy, her calm demeanor helps everyone find their center.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, Kapampangan, English",
-                avatar: "shen-avatar.jpg" 
+                avatar: "shen-avatar.jpg",
+                lat: 15.0800, lng: 120.5900 
             }, 
             { 
                 name: "Dado", 
@@ -1102,7 +1184,8 @@
                 summary: "A mariner with a love for the open sea. Dado brings a sense of adventure and steady navigation to our community's journey.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, Iloko, English",
-                avatar: "dado-avatar.jpg" 
+                avatar: "dado-avatar.jpg",
+                lat: 12.8797, lng: 121.7740 
             },
             { 
                 name: "Melody", 
@@ -1110,7 +1193,8 @@
                 summary: "Melody balances her dedication to her studies with her commitment to our community, inspiring us all to pursue our goals while staying connected.",
                 flags: "🇮🇳", 
                 lang: "Tamil, English",
-                avatar: "melody-avatar.jpg" 
+                avatar: "melody-avatar.jpg",
+                lat: 13.0827, lng: 80.2707 
             }, 
             { 
                 name: "Wintah", 
@@ -1118,7 +1202,8 @@
                 summary: "Wintah's presence is like a fresh morning. Her kindness and positive outlook make every day in the Never Ending Cafe feel like a new beginning.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, English",
-                avatar: "wintah-avatar.jpg" 
+                avatar: "wintah-avatar.jpg",
+                lat: 18.2164, lng: 120.5930 
             },
             { 
                 name: "Juan", 
@@ -1126,7 +1211,8 @@
                 summary: "Juan is the master of doing it all. Whether it's managing real-life duties or keeping the table chat going, he does it with a smile and zero stress.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, English",
-                avatar: "juan-avatar.jpg" 
+                avatar: "juan-avatar.jpg",
+                lat: 14.6760, lng: 121.0437 
             }, 
             { 
                 name: "Joy", 
@@ -1134,7 +1220,8 @@
                 summary: "Joy's sharp mind and expert 'Plato' skills are matched only by her loyalty. She looks at the big picture and keeps the group moving forward.",
                 flags: "🇲🇾", 
                 lang: "Tagalog, Malay, Mandarin, English",
-                avatar: "joy-avatar.jpg" 
+                avatar: "joy-avatar.jpg",
+                lat: 3.1390, lng: 101.6869 
             },
             { 
                 name: "Guzman", 
@@ -1142,7 +1229,8 @@
                 summary: "Guzman might not always be the first to arrive, but his entrance is always worth the wait. He brings style and a great sense of humor to the table.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, Cebuano, English",
-                avatar: "guzman-avatar.jpg" 
+                avatar: "guzman-avatar.jpg",
+                lat: 10.3157, lng: 123.8854 
             }, 
             { 
                 name: "Master", 
@@ -1150,7 +1238,8 @@
                 summary: "The ultimate host of the Cafe. Master's love for coffee and deep conversation makes her the perfect guide for new members joining our family.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, Cebuano, English",
-                avatar: "master-avatar.jpg" 
+                avatar: "master-avatar.jpg",
+                lat: 7.1907, lng: 125.4553 
             },
             { 
                 name: "Win", 
@@ -1158,7 +1247,8 @@
                 summary: "Win's passion for music and life is contagious. She keeps our spirits high and ensures there's always a reason to celebrate our friendship.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, English",
-                avatar: "win-avatar.jpg" 
+                avatar: "win-avatar.jpg",
+                lat: 13.1391, lng: 123.7438 
             }, 
             { 
                 name: "Ja el", 
@@ -1166,7 +1256,8 @@
                 summary: "Ja el has a way of seeing the world differently. Her poetic and 'floating' spirit adds a touch of magic and wonder to our late-night discussions.",
                 flags: "🇵🇭 🇲🇾", 
                 lang: "Tagalog, English",
-                avatar: "jael-avatar.jpg" 
+                avatar: "jael-avatar.jpg",
+                lat: 1.5533, lng: 103.6356 
             },
             { 
                 name: "Yvaine", 
@@ -1174,13 +1265,12 @@
                 summary: "Brave and bold, Yvaine isn't afraid to speak her truth. Her strength inspires others to be authentic and stand tall in the face of adversity.",
                 flags: "🇵🇭", 
                 lang: "Tagalog, English",
-                avatar: "yvaine-avatar.jpg" 
+                avatar: "yvaine-avatar.jpg",
+                lat: 14.5547, lng: 121.0244 
             }
         ];
 
-        const teamGrid = document.getElementById('teamGrid');
         const profileModal = document.getElementById('profileModal');
-        const letterModal = document.getElementById('letterModal');
         const modalAvatar = document.getElementById('modalAvatar');
         const modalFlagBadge = document.getElementById('modalFlagBadge');
         const modalName = document.getElementById('modalName');
@@ -1189,7 +1279,7 @@
         const modalFlags = document.getElementById('modalFlags');
         const modalLang = document.getElementById('modalLang');
 
-        // Helper function to handle Avatar Rendering with Fallback logic
+        // Helper function to handle Avatar Rendering
         function renderAvatarContent(name, avatarUrl) {
             const firstLetter = name.charAt(0);
             if (avatarUrl && avatarUrl.trim() !== "") {
@@ -1198,7 +1288,59 @@
             return firstLetter;
         }
 
-        // Render Team
+        // Shared function to open profile modal
+        function openProfileModal(m) {
+            modalAvatar.innerHTML = renderAvatarContent(m.name, m.avatar);
+            modalFlagBadge.textContent = m.flags;
+            modalName.textContent = m.name;
+            modalDesc.textContent = m.desc;
+            modalSummary.textContent = m.summary;
+            modalFlags.textContent = m.flags;
+            modalLang.textContent = m.lang;
+            profileModal.classList.add('active');
+        }
+
+        // Initialize Map
+        function initMap() {
+            const map = L.map('map', {
+                scrollWheelZoom: false,
+                attributionControl: false
+            }).setView([15, 80], 3);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                maxZoom: 19
+            }).addTo(map);
+
+            const markers = [];
+
+            team.forEach(m => {
+                // Create custom div icon using the member's avatar
+                const iconContent = m.avatar 
+                    ? `<img src="${m.avatar}" onerror="this.parentElement.innerHTML='<div class=map-avatar-fallback>${m.name[0]}</div>'">`
+                    : `<div class="map-avatar-fallback">${m.name[0]}</div>`;
+                
+                const customIcon = L.divIcon({
+                    className: 'map-avatar-marker',
+                    html: iconContent,
+                    iconSize: [44, 44],
+                    iconAnchor: [22, 44] 
+                });
+
+                const marker = L.marker([m.lat, m.lng], { icon: customIcon }).addTo(map);
+                
+                marker.on('click', () => {
+                    openProfileModal(m);
+                });
+
+                markers.push(marker);
+            });
+
+            const group = new L.featureGroup(markers);
+            map.fitBounds(group.getBounds().pad(0.2));
+        }
+
+        // Render Team Grid
+        const teamGrid = document.getElementById('teamGrid');
         team.forEach((m, i) => {
             const div = document.createElement('div');
             div.className = 'team-card reveal';
@@ -1216,19 +1358,18 @@
             `;
             
             div.addEventListener('click', () => {
-                modalAvatar.innerHTML = renderAvatarContent(m.name, m.avatar);
-                modalFlagBadge.textContent = m.flags;
-                modalName.textContent = m.name;
-                modalDesc.textContent = m.desc;
-                modalSummary.textContent = m.summary;
-                modalFlags.textContent = m.flags;
-                modalLang.textContent = m.lang;
-                profileModal.classList.add('active');
+                openProfileModal(m);
             });
             teamGrid.appendChild(div);
         });
 
+        // Initialize components on load
+        window.onload = () => {
+            initMap();
+        };
+
         // Letter Modal logic
+        const letterModal = document.getElementById('letterModal');
         document.getElementById('openLetter').addEventListener('click', () => letterModal.classList.add('active'));
         document.getElementById('closeLetterModal').addEventListener('click', () => letterModal.classList.remove('active'));
         letterModal.addEventListener('click', (e) => { if(e.target === letterModal) letterModal.classList.remove('active'); });
@@ -1264,7 +1405,7 @@
             });
         });
 
-        document.querySelectorAll('a, button, .team-card, .bento-item, .social-link, .envelope-trigger').forEach(el => {
+        document.querySelectorAll('a, button, .team-card, .bento-item, .social-link, .envelope-trigger, .map-avatar-marker').forEach(el => {
             el.addEventListener('mouseenter', () => { cursor.style.width = '50px'; cursor.style.height = '50px'; });
             el.addEventListener('mouseleave', () => { cursor.style.width = '20px'; cursor.style.height = '20px'; });
         });
