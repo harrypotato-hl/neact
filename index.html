@@ -556,7 +556,6 @@
             margin-bottom: 10px;
         }
         .envelope-trigger h3 { font-size: 2rem; color: var(--text-dark); }
-        .envelope-trigger p { font-weight: 600; color: var(--text-muted); opacity: 0.8; }
 
         /* --- Team Grid Section --- */
         #team { padding: 160px 5%; min-height: 100vh; z-index: var(--z-content); }
@@ -581,6 +580,10 @@
             border-radius: 50%; display: flex; 
             align-items: center; justify-content: center; 
             font-weight: 800; font-size: 1.8rem; transition: 0.4s; 
+            overflow: hidden; /* For images */
+        }
+        .initial-avatar img {
+            width: 100%; height: 100%; object-fit: cover;
         }
         .flag-badge {
             position: absolute;
@@ -659,6 +662,10 @@
             color: white; border-radius: 50%; display: flex; align-items: center;
             justify-content: center; font-size: 2.5rem; font-weight: 800;
             box-shadow: 0 15px 30px rgba(255,165,0,0.3);
+            overflow: hidden;
+        }
+        .modal-avatar img {
+            width: 100%; height: 100%; object-fit: cover;
         }
 
         .modal-name { font-size: 2.2rem; color: var(--text-dark); margin-bottom: 5px; }
@@ -1022,133 +1029,152 @@
                 desc: "The Heart of Jordan", 
                 summary: "Jade has been a pillar of the community since the Hilokal days, bringing a warm Jordanian spirit and helping bridge cultural gaps with kindness and genuine curiosity.",
                 flags: "🇵🇭 🇯🇴", 
-                lang: "Arabic, Tagalog, Cebuano, English" 
+                lang: "Arabic, Tagalog, Cebuano, English",
+                avatar: "jade-avatar.jpg" 
             }, 
             { 
                 name: "Rosette", 
                 desc: "Classy & Compassionate", 
                 summary: "Known for her sophisticated charm and deep empathy, Rosette provides a listening ear to everyone at the table, making sure no one feels left out during deep 'cheka' sessions.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, Kapampangan, English" 
+                lang: "Tagalog, Kapampangan, English",
+                avatar: "rosette-avatar.jpg" 
             },
             { 
                 name: "Maple/Sophie", 
                 desc: "The Sweetest Bunso", 
                 summary: "As our beloved youngest member, Sophie brings energy and a fresh perspective to every conversation, reminding us all of the joy of discovery and new beginnings.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, English" 
+                lang: "Tagalog, English",
+                avatar: "maple-avatar.jpg" 
             }, 
             { 
                 name: "Ginnie", 
                 desc: "Our Timeless Wisdom", 
                 summary: "Ginnie holds the stories of NEACT close to her heart. Her wisdom and 'ageless' spirit guide the group through challenges with grace and calm authority.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, Pangasinense, English" 
+                lang: "Tagalog, Pangasinense, English",
+                avatar: "ginnie-avatar.jpg" 
             },
             { 
                 name: "Harry", 
                 desc: "The Manila Boy", 
                 summary: "The creative force behind our hymn, Harry's Manila roots and musical talent gave NEACT its voice. He believes that every friendship deserves a melody.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, English" 
+                lang: "Tagalog, English",
+                avatar: "harry-avatar.jpg" 
             }, 
             { 
                 name: "C.A.", 
                 desc: "The Future Dreamer", 
                 summary: "A passionate soul with big dreams and a bigger heart for K-Pop. C.A. adds a layer of fun and shared interests that keeps our chats vibrant and current.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, Iloko, English" 
+                lang: "Tagalog, Iloko, English",
+                avatar: "ca-avatar.jpg" 
             },
             { 
                 name: "Ashley", 
                 desc: "Multi-cultural Soul", 
                 summary: "Living between two worlds, Ashley embodies the global spirit of NEACT, effortlessly blending Korean and Filipino cultures into a unique, lovable personality.",
                 flags: "🇰🇷 🇵🇭", 
-                lang: "Korean, Tagalog, English" 
+                lang: "Korean, Tagalog, English",
+                avatar: "ashley-avatar.jpg" 
             }, 
             { 
                 name: "Joshua", 
                 desc: "Always Reliable Friend", 
                 summary: "If you need a hand or a midnight chat, Joshua is the 'one call away' friend. His reliability is a cornerstone of the trust we share in the Cafe.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, English" 
+                lang: "Tagalog, English",
+                avatar: "joshua-avatar.jpg" 
             },
             { 
                 name: "Shen", 
                 desc: "Grounding Presence", 
                 summary: "Shen's stability is what keeps the table level. In moments of chaos or high energy, her calm demeanor helps everyone find their center.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, Kapampangan, English" 
+                lang: "Tagalog, Kapampangan, English",
+                avatar: "shen-avatar.jpg" 
             }, 
             { 
                 name: "Dado", 
                 desc: "Smooth Navigator", 
                 summary: "A mariner with a love for the open sea. Dado brings a sense of adventure and steady navigation to our community's journey.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, Iloko, English" 
+                lang: "Tagalog, Iloko, English",
+                avatar: "dado-avatar.jpg" 
             },
             { 
                 name: "Melody", 
                 desc: "Academic Excellence", 
                 summary: "Melody balances her dedication to her studies with her commitment to our community, inspiring us all to pursue our goals while staying connected.",
                 flags: "🇮🇳", 
-                lang: "Tamil, English" 
+                lang: "Tamil, English",
+                avatar: "melody-avatar.jpg" 
             }, 
             { 
                 name: "Wintah", 
                 desc: "Dawn of the North", 
                 summary: "Wintah's presence is like a fresh morning. Her kindness and positive outlook make every day in the Never Ending Cafe feel like a new beginning.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, English" 
+                lang: "Tagalog, English",
+                avatar: "wintah-avatar.jpg" 
             },
             { 
                 name: "Juan", 
                 desc: "Effortless Multitasker", 
                 summary: "Juan is the master of doing it all. Whether it's managing real-life duties or keeping the table chat going, he does it with a smile and zero stress.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, English" 
+                lang: "Tagalog, English",
+                avatar: "juan-avatar.jpg" 
             }, 
             { 
                 name: "Joy", 
                 desc: "Strategic Thinker", 
                 summary: "Joy's sharp mind and expert 'Plato' skills are matched only by her loyalty. She looks at the big picture and keeps the group moving forward.",
                 flags: "🇲🇾", 
-                lang: "Tagalog, Malay, Mandarin, English" 
+                lang: "Tagalog, Malay, Mandarin, English",
+                avatar: "joy-avatar.jpg" 
             },
             { 
                 name: "Guzman", 
                 desc: "Fashionably Late", 
                 summary: "Guzman might not always be the first to arrive, but his entrance is always worth the wait. He brings style and a great sense of humor to the table.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, Cebuano, English" 
+                lang: "Tagalog, Cebuano, English",
+                avatar: "guzman-avatar.jpg" 
             }, 
             { 
                 name: "Master", 
                 desc: "Coffee Connoisseur", 
                 summary: "The ultimate host of the Cafe. Master's love for coffee and deep conversation makes her the perfect guide for new members joining our family.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, Cebuano, English" 
+                lang: "Tagalog, Cebuano, English",
+                avatar: "master-avatar.jpg" 
             },
             { 
                 name: "Win", 
                 desc: "Vibrant Melodies", 
                 summary: "Win's passion for music and life is contagious. She keeps our spirits high and ensures there's always a reason to celebrate our friendship.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, English" 
+                lang: "Tagalog, English",
+                avatar: "win-avatar.jpg" 
             }, 
             { 
                 name: "Ja el", 
                 desc: "The Etherial Dreamer", 
                 summary: "Ja el has a way of seeing the world differently. Her poetic and 'floating' spirit adds a touch of magic and wonder to our late-night discussions.",
                 flags: "🇵🇭 🇲🇾", 
-                lang: "Tagalog, English" 
+                lang: "Tagalog, English",
+                avatar: "jael-avatar.jpg" 
             },
             { 
                 name: "Yvaine", 
                 desc: "Courageous Spirit", 
                 summary: "Brave and bold, Yvaine isn't afraid to speak her truth. Her strength inspires others to be authentic and stand tall in the face of adversity.",
                 flags: "🇵🇭", 
-                lang: "Tagalog, English" 
+                lang: "Tagalog, English",
+                avatar: "yvaine-avatar.jpg" 
             }
         ];
 
@@ -1163,21 +1189,34 @@
         const modalFlags = document.getElementById('modalFlags');
         const modalLang = document.getElementById('modalLang');
 
+        // Helper function to handle Avatar Rendering with Fallback logic
+        function renderAvatarContent(name, avatarUrl) {
+            const firstLetter = name.charAt(0);
+            if (avatarUrl && avatarUrl.trim() !== "") {
+                return `<img src="${avatarUrl}" alt="${name}" onerror="this.parentElement.innerHTML='${firstLetter}'">`;
+            }
+            return firstLetter;
+        }
+
         // Render Team
         team.forEach((m, i) => {
             const div = document.createElement('div');
             div.className = 'team-card reveal';
             div.style.transitionDelay = `${(i % 4) * 0.1}s`;
+            
+            const avatarContent = renderAvatarContent(m.name, m.avatar);
+
             div.innerHTML = `
                 <div class="avatar-wrapper">
-                    <div class="initial-avatar">${m.name.charAt(0)}</div>
+                    <div class="initial-avatar">${avatarContent}</div>
                     <div class="flag-badge">${m.flags}</div>
                 </div>
                 <h3>${m.name}</h3>
                 <p>${m.desc}</p>
             `;
+            
             div.addEventListener('click', () => {
-                modalAvatar.textContent = m.name.charAt(0);
+                modalAvatar.innerHTML = renderAvatarContent(m.name, m.avatar);
                 modalFlagBadge.textContent = m.flags;
                 modalName.textContent = m.name;
                 modalDesc.textContent = m.desc;
