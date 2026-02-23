@@ -313,6 +313,66 @@
         }
         .btn-main:hover { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(255, 165, 0, 0.4); }
 
+        /* --- Birthday Section --- */
+        #birthday-section {
+            padding: 60px 5%;
+            background: var(--cream);
+            display: none; /* Hidden by default, shown via JS */
+            z-index: 10;
+        }
+
+        .birthday-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--glass-bg-dark);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            box-shadow: 0 30px 60px rgba(255, 165, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .birthday-card::before {
+            content: '🎂';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 8rem;
+            opacity: 0.05;
+            transform: rotate(15deg);
+        }
+
+        .birthday-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--primary);
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .birthday-content { text-align: left; }
+        .birthday-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 15px;
+        }
+        .birthday-content h2 { font-size: 2.5rem; margin-bottom: 10px; color: var(--text-dark); }
+        .birthday-content p { font-size: 1.2rem; font-weight: 600; color: var(--text-muted); }
+
+
         /* --- Cinematic Timeline Section --- */
         #history { 
             padding: 0; 
@@ -1018,7 +1078,17 @@
             Start the Journey <i data-lucide="play"></i>
         </a>
     </section>
-
+    <!-- BIRTHDAY ALERT SECTION -->
+    <section id="birthday-section">
+        <div class="birthday-card reveal">
+            <img id="bday-avatar" src="" alt="Celebrant" class="birthday-avatar">
+            <div class="birthday-content">
+                <span class="birthday-tag">Special Occasion</span>
+                <h2 id="bday-greeting">Happy Birthday, Name!</h2>
+                <p id="bday-wish">Today, the Croissant Table celebrates you. We wish you a day filled with joy, laughter, and endless coffee sessions!</p>
+            </div>
+        </div>
+    </section>
     <!-- CINEMATIC TIMELINE -->
     <section id="history">
         <div class="history-intro">
@@ -1316,7 +1386,32 @@
         lucide.createIcons();
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        
+        // Check for Birthdays
+        function checkBirthdays() {
+            const today = new Date();
+            const todayMonthDay = `${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+            
+            const celebrant = team.find(m => {
+                if (!m.birthday) return false;
+                // m.birthday is YYYY-MM-DD
+                const bdayParts = m.birthday.split('-');
+                const bdayMonthDay = `${bdayParts[1]}-${bdayParts[2]}`;
+                return bdayMonthDay === todayMonthDay;
+            });
+
+            if (celebrant) {
+                const bdaySection = document.getElementById('birthday-section');
+                const bdayAvatar = document.getElementById('bday-avatar');
+                const bdayGreeting = document.getElementById('bday-greeting');
+                
+                bdayAvatar.src = celebrant.avatar || "images/sample";
+                bdayGreeting.textContent = `Happy Birthday, ${celebrant.name}! 🎂`;
+                bdaySection.style.display = 'block';
+                
+                // Extra celebratory effect
+                rain(30);
+            }
+        }
 
         // Membership Card Logic
         const cardCanvas = document.getElementById('membershipCanvas');
