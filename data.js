@@ -18,7 +18,7 @@ export const team = [
             { id: "win", name: "Win", birthday: null, desc: "Vibrant Melodies", summary: "Win's passion for music and life is contagious. She keeps our spirits high and ensures there's always a reason to celebrate our friendship.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/win-avatar.jpg", lat: 14.75313, lng: 120.95541, traits: ['vibrant', 'celebrate', 'contagious'] }, 
             { id: "jael", name: "Ja el", birthday: "1997-06-09", desc: "The Etherial Dreamer", summary: "Ja el has a way of seeing the world differently. Her poetic and 'floating' spirit adds a touch of magic and wonder to our late-night discussions.", flags: "🇵🇭 🇲🇾", lang: "Tagalog, English", avatar: "images/jael-avatar.jpg", lat: 3.07190, lng: 101.50824, traits: ['poetic', 'magic', 'dreamer'] },
             { id: "yvaine", name: "Yvaine", birthday: null, desc: "Courageous Spirit", summary: "Brave and bold, Yvaine isn't afraid to speak her truth. Her strength inspires others to be authentic and stand tall in the face of adversity.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/yvaine-avatar.jpg", lat: 14.21797, lng: 120.97354, traits: ['courage', 'bold', 'authentic'] },
-            { id: "guardia", name: "Guardia Civil", birthday: "1997-02-25", desc: "The Silent One", summary: "The Guardia Civil in NEACT is a mysterious presence, silently existing without explanation.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/avatar-guardia.jpg", lat: 14.595110, lng: 120.969586, traits: ['mysterious', 'observant', 'detached'] }
+            { id: "guardia", name: "Guardia Civil", birthday: "1997-08-12", desc: "The Silent One", summary: "The Guardia Civil in NEACT is a mysterious presence, silently existing without explanation.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/avatar-guardia.jpg", lat: 14.595110, lng: 120.969586, traits: ['mysterious', 'observant', 'detached'] }
         
 ];
 
@@ -62,6 +62,7 @@ export const quizData = [
             }
 
 ];
+
 
 
 
