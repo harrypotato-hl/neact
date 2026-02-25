@@ -1522,11 +1522,10 @@
         let currentQ = 0;
         let userPoints = {};
 
-        function startQuiz() {
+        window.startQuiz = function() {
             document.getElementById('quiz-start').classList.remove('active');
             showQuestion();
-        }
-
+        };
         function showQuestion() {
             const q = quizData[currentQ];
             const qContainer = document.getElementById('quiz-q');
@@ -1550,9 +1549,9 @@
             progressBar.style.width = `${(currentQ / quizData.length) * 100}%`;
         }
 
-        function handleAnswer(traits) {
+        window.handleAnswer = function(traits) {
             traits.forEach(t => {
-                userPoints[t] = (userPoints[t] || 0) + 1;
+            userPoints[t] = (userPoints[t] || 0) + 1;
             });
 
             currentQ++;
@@ -1563,7 +1562,7 @@
             } else {
                 showLoading();
             }
-        }
+        };
 
         function showLoading() {
             document.getElementById('quiz-progress-bar').style.width = '100%';
