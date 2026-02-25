@@ -17,7 +17,8 @@ export const team = [
             { id: "master", name: "Master", birthday: null, desc: "Coffee Connoisseur", summary: "The ultimate host of the Cafe. Master's love for coffee and deep conversation makes her the perfect guide for new members joining our family.", flags: "🇵🇭", lang: "Tagalog, Cebuano, English", avatar: "images/master-avatar.jpg", lat: 7.76840, lng: 125.00033, traits: ['host', 'guide', 'coffee'] },
             { id: "win", name: "Win", birthday: null, desc: "Vibrant Melodies", summary: "Win's passion for music and life is contagious. She keeps our spirits high and ensures there's always a reason to celebrate our friendship.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/win-avatar.jpg", lat: 14.75313, lng: 120.95541, traits: ['vibrant', 'celebrate', 'contagious'] }, 
             { id: "jael", name: "Ja el", birthday: "1997-06-09", desc: "The Etherial Dreamer", summary: "Ja el has a way of seeing the world differently. Her poetic and 'floating' spirit adds a touch of magic and wonder to our late-night discussions.", flags: "🇵🇭 🇲🇾", lang: "Tagalog, English", avatar: "images/jael-avatar.jpg", lat: 3.07190, lng: 101.50824, traits: ['poetic', 'magic', 'dreamer'] },
-            { id: "yvaine", name: "Yvaine", birthday: null, desc: "Courageous Spirit", summary: "Brave and bold, Yvaine isn't afraid to speak her truth. Her strength inspires others to be authentic and stand tall in the face of adversity.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/yvaine-avatar.jpg", lat: 14.21797, lng: 120.97354, traits: ['courage', 'bold', 'authentic'] }
+            { id: "yvaine", name: "Yvaine", birthday: null, desc: "Courageous Spirit", summary: "Brave and bold, Yvaine isn't afraid to speak her truth. Her strength inspires others to be authentic and stand tall in the face of adversity.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/yvaine-avatar.jpg", lat: 14.21797, lng: 120.97354, traits: ['courage', 'bold', 'authentic'] },
+            { id: "guardia", name: "Guardia Civil", birthday: "1997-02-25", desc: "The Silent One", summary: "The Guardia Civil in NEACT is a mysterious presence, silently existing without explanation.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "", lat: 14.595110, lng: 120.969586, traits: ['mysterious', 'observant', 'detached'] }
         
 ];
 
@@ -29,7 +30,7 @@ export const quizData = [
                     { text: "The host who makes everyone feel at home", traits: ['host', 'bridging', 'guide'] },
                     { text: "The listener who gives deep advice", traits: ['wisdom', 'empathy', 'listening'] },
                     { text: "The one keeping the vibes high and loud", traits: ['energy', 'fun', 'vibrant'] },
-                    { text: "The steady presence in the background", traits: ['stability', 'center', 'grounding'] }
+                    { text: "The steady presence in the background", traits: ['stability', 'center', 'grounding','observant'] }
                 ]
             },
             {
@@ -47,13 +48,13 @@ export const quizData = [
                     { text: "A song or a melody", traits: ['creative', 'musical', 'voice'] },
                     { text: "A strategic plan for the future", traits: ['strategic', 'sharp', 'excellence'] },
                     { text: "A safe space for others to vent", traits: ['supportive', 'reliable', 'trust'] },
-                    { text: "A poetic piece about our bond", traits: ['poetic', 'magic', 'dreamer'] }
+                    { text: "A poetic piece about our bond", traits: ['poetic', 'magic', 'dreamer', 'mysterious'] }
                 ]
             },
             {
                 question: "How do you handle a chaotic situation?",
                 options: [
-                    { text: "I stay calm and speak my truth", traits: ['courage', 'authentic', 'bold'] },
+                    { text: "I stay calm and speak my truth", traits: ['courage', 'authentic', 'bold','detached'] },
                     { text: "I try to guide everyone toward a solution", traits: ['wisdom', 'guiding', 'center'] },
                     { text: "I lighten the mood with a joke", traits: ['humor', 'fun', 'relaxed'] },
                     { text: "I reliably show up for those who need me", traits: ['reliable', 'supportive', 'warm'] }
@@ -61,5 +62,6 @@ export const quizData = [
             }
 
 ];
+
 
 
