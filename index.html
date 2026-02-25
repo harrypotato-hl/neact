@@ -1389,26 +1389,31 @@
         // Check for Birthdays
         function checkBirthdays() {
             const today = new Date();
+            // Format: MM-DD
             const todayMonthDay = `${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
             
             const celebrant = team.find(m => {
+                // Safety check: skip if birthday is null or undefined
                 if (!m.birthday) return false;
-                // m.birthday is YYYY-MM-DD
+        
                 const bdayParts = m.birthday.split('-');
+                if (bdayParts.length < 3) return false;
+        
                 const bdayMonthDay = `${bdayParts[1]}-${bdayParts[2]}`;
                 return bdayMonthDay === todayMonthDay;
             });
-
+        
             if (celebrant) {
                 const bdaySection = document.getElementById('birthday-section');
                 const bdayAvatar = document.getElementById('bday-avatar');
                 const bdayGreeting = document.getElementById('bday-greeting');
                 
-                bdayAvatar.src = celebrant.avatar || "images/sample";
+                // Use member's avatar or the sample image provided in your files
+                bdayAvatar.src = celebrant.avatar || "images/sample"; 
                 bdayGreeting.textContent = `Happy Birthday, ${celebrant.name}! 🎂`;
                 bdaySection.style.display = 'block';
                 
-                // Extra celebratory effect
+                // Trigger the celebration effect
                 rain(30);
             }
         }
@@ -1684,7 +1689,8 @@
 
         window.onload = () => {
             initMap();
-            drawCard(); // Initial card render
+            drawCard();
+            checkBirthdays();
         };
 
         const letterModal = document.getElementById('letterModal');
