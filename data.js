@@ -12,7 +12,7 @@ export const team = [
             { id: "melody", name: "Melody", birthday: "2005-02-08", desc: "Academic Excellence", summary: "Melody balances her dedication to her studies with her commitment to our community, inspiring us all to pursue our goals while staying connected.", flags: "🇮🇳", lang: "Tamil, English", avatar: "images/melody-avatar.jpg", lat: 13.0827, lng: 80.2707, traits: ['academic', 'excellence', 'goals'] }, 
             { id: "wintah", name: "Wintah", birthday: "2005-06-18", desc: "Dawn of the North", summary: "Wintah's presence is like a fresh morning. Her kindness and positive outlook make every day in the Never Ending Cafe feel like a new beginning.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/wintah-avatar.jpg", lat: 14.69036, lng: 121.02730, traits: ['fresh', 'positive', 'dawn'] },
             { id: "juan", name: "Juan", birthday: null, desc: "Effortless Multitasker", summary: "Juan is the master of doing it all. Whether it's managing real-life duties or keeping the table chat going, he does it with a smile and zero stress.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/juan-avatar.jpg", lat: 14.40978, lng: 120.93172, traits: ['multitasker', 'zero-stress', 'smiles'] }, 
-            { id: "joy", name: "Joy", birthday: null, desc: "Strategic Thinker", summary: "Joy's sharp mind and expert 'Plato' skills are matched only by her loyalty. She looks at the big picture and keeps the group moving forward.", flags: "🇲🇾", lang: "Tagalog, Malay, Mandarin, English", avatar: "images/joy-avatar.jpg", lat: 2.98356, lng: 101.79234, traits: ['strategic', 'sharp', 'loyalty'] },
+            { id: "joy", name: "Joy", birthday: "2005-02-27", desc: "Strategic Thinker", summary: "Joy's sharp mind and expert 'Plato' skills are matched only by her loyalty. She looks at the big picture and keeps the group moving forward.", flags: "🇲🇾", lang: "Tagalog, Malay, Mandarin, English", avatar: "images/joy-avatar.jpg", lat: 2.98356, lng: 101.79234, traits: ['strategic', 'sharp', 'loyalty'] },
             { id: "guzman", name: "Guzman", birthday: null, desc: "Fashionably Late", summary: "Guzman might not always be the first to arrive, but his entrance is always worth the wait. He brings style and a great sense of humor to the table.", flags: "🇵🇭", lang: "Tagalog, Cebuano, English", avatar: "images/guzman-avatar.jpg", lat: 7.00496, lng: 125.09276, traits: ['humor', 'style', 'relaxed'] }, 
             { id: "master", name: "Master", birthday: null, desc: "Coffee Connoisseur", summary: "The ultimate host of the Cafe. Master's love for coffee and deep conversation makes her the perfect guide for new members joining our family.", flags: "🇵🇭", lang: "Tagalog, Cebuano, English", avatar: "images/master-avatar.jpg", lat: 7.76840, lng: 125.00033, traits: ['host', 'guide', 'coffee'] },
             { id: "win", name: "Win", birthday: null, desc: "Vibrant Melodies", summary: "Win's passion for music and life is contagious. She keeps our spirits high and ensures there's always a reason to celebrate our friendship.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/win-avatar.jpg", lat: 14.75313, lng: 120.95541, traits: ['vibrant', 'celebrate', 'contagious'] }, 
@@ -62,6 +62,7 @@ export const quizData = [
             }
 
 ];
+
 
 
 
