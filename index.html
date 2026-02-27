@@ -1399,29 +1399,42 @@
             // Format: MM-DD
             const todayMonthDay = `${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
             
-            const celebrant = team.find(m => {
-                // Safety check: skip if birthday is null or undefined
+            // Filter all members who have a birthday today
+            const celebrants = team.filter(m => {
                 if (!m.birthday) return false;
-        
                 const bdayParts = m.birthday.split('-');
                 if (bdayParts.length < 3) return false;
-        
                 const bdayMonthDay = `${bdayParts[1]}-${bdayParts[2]}`;
                 return bdayMonthDay === todayMonthDay;
             });
         
-            if (celebrant) {
+            if (celebrants.length > 0) {
                 const bdaySection = document.getElementById('birthday-section');
-                const bdayAvatar = document.getElementById('bday-avatar');
-                const bdayGreeting = document.getElementById('bday-greeting');
                 
-                // Use member's avatar or the sample image provided in your files
-                bdayAvatar.src = celebrant.avatar || "images/sample"; 
-                bdayGreeting.textContent = `Happy Birthday, ${celebrant.name}! 🎂`;
+                // Clear the section and prepare it to hold multiple cards
+                bdaySection.innerHTML = ''; 
                 bdaySection.style.display = 'block';
-                
-                // Trigger the celebration effect
-                rain(30);
+        
+                celebrants.forEach(celebrant => {
+                    // Create a new card element for each person
+                    const card = document.createElement('div');
+                    card.className = 'birthday-card reveal active'; // 'active' ensures it shows immediately
+                    card.style.marginBottom = '20px'; // Add spacing between cards
+        
+                    card.innerHTML = `
+                        <img src="${celebrant.avatar || "images/sample"}" alt="${celebrant.name}" class="birthday-avatar">
+                        <div class="birthday-content">
+                            <span class="birthday-tag">Special Occasion</span>
+                            <h2>Happy Birthday, ${celebrant.name}! 🎂</h2>
+                            <p>Today, the Never Ending and Croissant Table celebrates you. We wish you a day filled with joy, laughter, and endless coffee sessions!</p>
+                        </div>
+                    `;
+                    
+                    bdaySection.appendChild(card);
+                });
+        
+                // Trigger the celebration effect scaled by the number of people
+                rain(30 * celebrants.length);
             }
         }
 
