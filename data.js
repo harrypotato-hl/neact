@@ -63,6 +63,66 @@ export const quizData = [
 
 ];
 
+export const traitThemes = {
+    // Leadership & Guidance
+    'host': { primary: '#EB4D4B', secondary: '#FF7979' },
+    'guide': { primary: '#4834D4', secondary: '#686DE0' },
+    'wisdom': { primary: '#30336B', secondary: '#95AFC0' },
+    'guiding': { primary: '#22A6B3', secondary: '#7ED6DF' },
+    
+    // Social & Emotional
+    'bridging': { primary: '#F0932B', secondary: '#FFBE76' },
+    'warm': { primary: '#FF7979', secondary: '#FAB1A0' },
+    'kind': { primary: '#FF9FF3', secondary: '#F368E0' },
+    'empathy': { primary: '#6A89CC', secondary: '#4A69BD' },
+    'listening': { primary: '#D2DAE2', secondary: '#808E9B' },
+    'supportive': { primary: '#B8E994', secondary: '#78E08F' },
+    'lovable': { primary: '#FC5C65', secondary: '#EB3B5A' },
+    
+    // Energy & Creativity
+    'young': { primary: '#F7B731', secondary: '#FBC531' },
+    'energy': { primary: '#FA8231', secondary: '#FD9644' },
+    'fresh': { primary: '#26DE81', secondary: '#2BCBBA' },
+    'creative': { primary: '#A55EEA', secondary: '#8854D0' },
+    'musical': { primary: '#4B7BEC', secondary: '#3867D6' },
+    'voice': { primary: '#45AAF2', secondary: '#2D98DA' },
+    'vibrant': { primary: '#FD9644', secondary: '#FA8231' },
+    'fun': { primary: '#FF9F43', secondary: '#F39C12' },
+    
+    // Stability & Presence
+    'calm': { primary: '#82CCDD', secondary: '#60A3BC' },
+    'stability': { primary: '#079992', secondary: '#38ADA9' },
+    'center': { primary: '#78E08F', secondary: '#B8E994' },
+    'grounding': { primary: '#60A3BC', secondary: '#3C6382' },
+    'reliable': { primary: '#1E3799', secondary: '#4A69BD' },
+    'trust': { primary: '#0C2461', secondary: '#1E3799' },
+    
+    // Excellence & Character
+    'academic': { primary: '#6D214F', secondary: '#B33771' },
+    'excellence': { primary: '#1B1464', secondary: '#0652DD' },
+    'goals': { primary: '#009432', secondary: '#A3CB38' },
+    'strategic': { primary: '#2F3640', secondary: '#7F8C8D' },
+    'sharp': { primary: '#E1B12C', secondary: '#FBC531' },
+    'loyalty': { primary: '#44BD32', secondary: '#4CD137' },
+    'courage': { primary: '#C23616', secondary: '#EA2027' },
+    'bold': { primary: '#711100', secondary: '#C23616' },
+    'authentic': { primary: '#006266', secondary: '#1B8D81' },
+    
+    // Global & Special
+    'global': { primary: '#0984E3', secondary: '#74B9FF' },
+    'blending': { primary: '#6C5CE7', secondary: '#A29BFE' },
+    'adventure': { primary: '#E67E22', secondary: '#D35400' },
+    'navigator': { primary: '#2980B9', secondary: '#3498DB' },
+    'poetic': { primary: '#A29BFE', secondary: '#6C5CE7' },
+    'magic': { primary: '#FDA7DF', secondary: '#D980FA' },
+    'dreamer': { primary: '#706FD3', secondary: '#474787' },
+    'mysterious': { primary: '#2C3E50', secondary: '#34495E' },
+    'observant': { primary: '#95A5A6', secondary: '#7F8C8D' },
+    'detached': { primary: '#BDC3C7', secondary: '#95A5A6' },
+    'coffee': { primary: '#6F4E37', secondary: '#A67C52' }
+};
+
+
 
 
 
