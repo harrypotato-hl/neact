@@ -1216,7 +1216,7 @@
     </section>
 
     <!-- MEMBERSHIP CARD SECTION -->
-    <section id="membership">
+    <section id="membership" style="display: none;">
         <div class="section-header reveal">
             <h2 class="section-title">Get Your Member ID</h2>
             <p class="section-sub">You're officially one of us. Personalize your NEACT digital ID card below.</p>
@@ -1506,16 +1506,16 @@
         const refreshBtn = document.getElementById('refreshCardBtn');
         let currentMemberID = Math.floor(1000 + Math.random() * 9000);
 
-        function drawCard() {
+        function drawCard(theme = { primary: '#FFA500', secondary: '#FFB732' }) {
             const name = nameInput.value || "NEACT Member";
             const dateStr = "Est. August 2021";
             
-            // Background
-            const gradient = ctx.createLinearGradient(0, 0, 600, 350);
-            gradient.addColorStop(0, '#FFA500'); // Primary
-            gradient.addColorStop(1, '#FFB732'); // Primary Light
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, 600, 350);
+            // Background - Use dynamic theme colors
+    const gradient = ctx.createLinearGradient(0, 0, 600, 350);
+    gradient.addColorStop(0, theme.primary); 
+    gradient.addColorStop(1, theme.secondary); 
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 600, 350);
 
             // Pattern / Accents
             ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
@@ -1655,30 +1655,46 @@
             }, 1500);
         }
 
-        function calculateResult() {
-            let bestMatch = team[0];
-            let maxScore = -1;
+// Inside your <script type="module"> in index.html
 
-            team.forEach(member => {
-                let score = 0;
-                member.traits.forEach(trait => {
-                    if (userPoints[trait]) score += userPoints[trait];
-                });
-                if (score > maxScore) {
-                    maxScore = score;
-                    bestMatch = member;
-                }
-            });
+function calculateResult() {
+    let bestMatch = team[0];
+    let maxScore = -1;
+    let topTrait = '';
 
-            openProfileModal(bestMatch);
-            const modalNameEl = document.getElementById('modalName');
-            modalNameEl.innerHTML = `<span style="display:block; font-size: 0.9rem; color: var(--primary); letter-spacing: 2px;">YOUR MATCH IS:</span> ${bestMatch.name}`;
-            
-            currentQ = 0;
-            userPoints = {};
-            document.getElementById('quiz-start').classList.add('active');
-            document.getElementById('quiz-progress-bar').style.width = '0%';
+    // Find the trait with the highest score from the user's answers
+    for (const [trait, score] of Object.entries(userPoints)) {
+        if (score > maxScore) {
+            maxScore = score;
+            topTrait = trait;
         }
+    }
+
+    // Find the best member match
+    team.forEach(member => {
+        let memberScore = 0;
+        member.traits.forEach(t => {
+            if (userPoints[t]) memberScore += userPoints[t];
+        });
+        if (memberScore > maxScore) {
+            bestMatch = member;
+        }
+    });
+
+    // 1. Show the membership section
+    const membershipSection = document.getElementById('membership');
+    membershipSection.style.display = 'block';
+    
+    // 2. Scroll to the membership section
+    membershipSection.scrollIntoView({ behavior: 'smooth' });
+
+    // 3. Redraw the card with the new theme
+    const theme = traitThemes[topTrait] || { primary: '#FFA500', secondary: '#FFB732' };
+    drawCard(theme);
+
+    // Show the profile modal as usual
+    openProfileModal(bestMatch);
+}
 
         const profileModal = document.getElementById('profileModal');
         const modalAvatar = document.getElementById('modalAvatar');
