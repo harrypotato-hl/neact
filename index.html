@@ -1096,6 +1096,15 @@
             </div>
         </div>
     </section>
+
+    <section id="upcoming-birthdays" style="padding: 60px 5%; background: var(--white); display: none;">
+    <div class="section-header reveal">
+        <h2 class="section-title">Birthdays</h2>
+        <p class="section-sub">Celebrating our members' special days</p>
+    </div>
+    <div id="birthday-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 40px auto 0;">
+        </div>
+</section>
     <!-- CINEMATIC TIMELINE -->
     <section id="history">
         <div class="history-intro">
@@ -1393,6 +1402,57 @@
         lucide.createIcons();
         document.getElementById('year').textContent = new Date().getFullYear();
 
+
+
+        function displayUpcomingBirthdays() {
+    const today = new Date();
+    const bdaySection = document.getElementById('upcoming-birthdays');
+    const bdayList = document.getElementById('birthday-list');
+    
+    const relevantMembers = team.filter(m => {
+        if (!m.birthday) return false;
+        
+        const bdayDate = new Date(m.birthday);
+        const currentYearBday = new Date(today.getFullYear(), bdayDate.getMonth(), bdayDate.getDate());
+        
+        // Calculate difference in days
+        const diffTime = currentYearBday - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        
+        // Include if birthday was in the last 7 days or is in the next 14 days
+        return diffDays >= -7 && diffDays <= 14;
+    }).sort((a, b) => {
+        // Sort by upcoming date
+        const dateA = new Date(today.getFullYear(), new Date(a.birthday).getMonth(), new Date(a.birthday).getDate());
+        const dateB = new Date(today.getFullYear(), new Date(b.birthday).getMonth(), new Date(b.birthday).getDate());
+        return dateA - dateB;
+    });
+
+    if (relevantMembers.length > 0) {
+        bdaySection.style.display = 'block';
+        bdayList.innerHTML = relevantMembers.map(m => {
+            const bday = new Date(m.birthday);
+            const isToday = bday.getMonth() === today.getMonth() && bday.getDate() === today.getDate();
+            
+            return `
+                <div class="team-card reveal active" style="padding: 30px;">
+                    <div class="avatar-wrapper" style="width: 60px; height: 60px;">
+                        <div class="initial-avatar">
+                            ${m.avatar ? `<img src="${m.avatar}" alt="${m.name}">` : m.name[0]}
+                        </div>
+                    </div>
+                    <h3 style="font-size: 1.2rem; margin-top: 10px;">${m.name} ${isToday ? '🎂' : ''}</h3>
+                    <p style="color: var(--primary); font-size: 0.8rem;">
+                        ${bday.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+                    </p>
+                    <span style="font-size: 0.9rem; font-weight: 600;">
+                        ${isToday ? 'Happening Today!' : (new Date(today.getFullYear(), bday.getMonth(), bday.getDate()) < today ? 'Recently Celebrated' : 'Upcoming')}
+                    </span>
+                </div>
+            `;
+        }).join('');
+    }
+}
         // Check for Birthdays
         function checkBirthdays() {
             const today = new Date();
@@ -1710,6 +1770,7 @@
             initMap();
             drawCard();
             checkBirthdays();
+            displayUpcomingBirthdays();
         };
 
         const letterModal = document.getElementById('letterModal');
