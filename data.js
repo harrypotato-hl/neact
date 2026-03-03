@@ -15,7 +15,7 @@ export const team = [
             { id: "joy", name: "Joy", birthday: "2005-02-27", desc: "Strategic Thinker", summary: "Joy's sharp mind and expert 'Plato' skills are matched only by her loyalty. She looks at the big picture and keeps the group moving forward.", flags: "🇲🇾", lang: "Tagalog, Malay, Mandarin, English", avatar: "images/joy-avatar.jpg", lat: 2.98356, lng: 101.79234, traits: ['strategic', 'sharp', 'loyalty'] },
             { id: "guzman", name: "Guzman", birthday: null, desc: "Fashionably Late", summary: "Guzman might not always be the first to arrive, but his entrance is always worth the wait. He brings style and a great sense of humor to the table.", flags: "🇵🇭", lang: "Tagalog, Cebuano, English", avatar: "images/guzman-avatar.jpg", lat: 7.00496, lng: 125.09276, traits: ['humor', 'style', 'relaxed'] }, 
             { id: "master", name: "Master", birthday: "1999-11-05", desc: "Coffee Connoisseur", summary: "The ultimate host of the Cafe. Master's love for coffee and deep conversation makes her the perfect guide for new members joining our family.", flags: "🇵🇭", lang: "Tagalog, Cebuano, English", avatar: "images/master-avatar.jpg", lat: 7.76840, lng: 125.00033, traits: ['host', 'guide', 'coffee'] },
-            { id: "win", name: "Win", birthday: null, desc: "Vibrant Melodies", summary: "Win's passion for music and life is contagious. She keeps our spirits high and ensures there's always a reason to celebrate our friendship.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/win-avatar.jpg", lat: 14.75313, lng: 120.95541, traits: ['vibrant', 'celebrate', 'contagious'] }, 
+            { id: "win", name: "Win", birthday: "1999-11-20", desc: "Vibrant Melodies", summary: "Win's passion for music and life is contagious. She keeps our spirits high and ensures there's always a reason to celebrate our friendship.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/win-avatar.jpg", lat: 14.75313, lng: 120.95541, traits: ['vibrant', 'celebrate', 'contagious'] }, 
             { id: "jael", name: "Ja el", birthday: "1997-06-09", desc: "The Etherial Dreamer", summary: "Ja el has a way of seeing the world differently. Her poetic and 'floating' spirit adds a touch of magic and wonder to our late-night discussions.", flags: "🇵🇭 🇲🇾", lang: "Tagalog, English", avatar: "images/jael-avatar.jpg", lat: 3.07190, lng: 101.50824, traits: ['poetic', 'magic', 'dreamer'] },
             { id: "yvaine", name: "Yvaine", birthday: null, desc: "Courageous Spirit", summary: "Brave and bold, Yvaine isn't afraid to speak her truth. Her strength inspires others to be authentic and stand tall in the face of adversity.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/yvaine-avatar.jpg", lat: 14.21797, lng: 120.97354, traits: ['courage', 'bold', 'authentic'] },
             { id: "guardia", name: "Guardia Civil", birthday: "1997-08-12", desc: "The Silent One", summary: "The Guardia Civil in NEACT is a mysterious presence, silently existing without explanation.", flags: "🇵🇭", lang: "Tagalog, English", avatar: "images/avatar-guardia.jpg", lat: 14.595110, lng: 120.969586, traits: ['mysterious', 'observant', 'detached'] }
@@ -121,6 +121,7 @@ export const traitThemes = {
     'detached': { primary: '#BDC3C7', secondary: '#95A5A6' },
     'coffee': { primary: '#6F4E37', secondary: '#A67C52' }
 };
+
 
 
 
